@@ -1,11 +1,26 @@
 package csc4330.mike.dreamlink.activities;
 
+import android.app.Activity;
+import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+
 import com.parse.ParseUser;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import csc4330.mike.dreamlink.R;
 
 /**
  * Created by Mike on 9/4/15.
  */
-public class LoginScreen {
+public class LoginScreen extends Activity {
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_user_login);
+        ButterKnife.bind(this);
 
 //    ParseUser user = new ParseUser();
 //    user.setUsername("my name");
@@ -26,4 +41,5 @@ public class LoginScreen {
 //        }
 //    });
 
+    }
 }
