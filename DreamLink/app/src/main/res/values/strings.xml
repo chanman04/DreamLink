@@ -6,4 +6,6 @@
 
     <string name="drawer_open">open</string>
     <string name="drawer_close">close</string>
+    <string name="record_dream_menu">Record Dream</string>
+    <string name="dream_feed_menu">Dream Feed</string>
 </resources>
