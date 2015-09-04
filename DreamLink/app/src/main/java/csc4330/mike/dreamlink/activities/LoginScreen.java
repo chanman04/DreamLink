@@ -9,6 +9,8 @@ import android.widget.EditText;
 
 import com.parse.ParseUser;
 
+import org.w3c.dom.Text;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import csc4330.mike.dreamlink.R;
@@ -29,6 +31,10 @@ public class LoginScreen extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_login);
         ButterKnife.bind(this);
+
+        userEditText.setHint("username");
+        passwordEditText.setHint("password");
+        emailEditText.setHint("email");
 
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
