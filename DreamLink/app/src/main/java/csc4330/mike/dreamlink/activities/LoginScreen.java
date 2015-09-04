@@ -3,6 +3,9 @@ package csc4330.mike.dreamlink.activities;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
 import com.parse.ParseUser;
 
@@ -15,12 +18,25 @@ import csc4330.mike.dreamlink.R;
  */
 public class LoginScreen extends Activity {
 
+    @Bind(R.id.user_ET) EditText userEditText;
+    @Bind(R.id.password_ET) EditText passwordEditText;
+    @Bind(R.id.email_ET) EditText emailEditText;
+    @Bind(R.id.submit_button) Button submitButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_login);
         ButterKnife.bind(this);
+
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
 
 //    ParseUser user = new ParseUser();
 //    user.setUsername("my name");
