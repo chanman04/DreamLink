@@ -7,8 +7,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import java.io.IOException;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import csc4330.mike.dreamlink.R;
@@ -44,9 +42,9 @@ public class RecordDream extends ActionBarActivity {
 
                     }
 
-                }catch(IOException e){
+                }catch(Exception e){
 
-
+                    return;
 
                 }
             }

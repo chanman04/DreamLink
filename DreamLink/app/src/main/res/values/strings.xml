@@ -9,4 +9,5 @@
     <string name="record_dream_menu">Record Dream</string>
     <string name="dream_feed_menu">Dream Feed</string>
     <string name="submit_button_text">Submit</string>
+    <string name="facebook_app_id">facebook_app_id</string>
 </resources>
