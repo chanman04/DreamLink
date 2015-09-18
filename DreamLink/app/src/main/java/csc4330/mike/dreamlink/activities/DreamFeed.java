@@ -30,6 +30,8 @@ public class DreamFeed extends ActionBarActivity{
         setSupportActionBar(mainToolbar);
         getSupportActionBar().setTitle("Dream Feed");
 
+
+
     }
 
 }

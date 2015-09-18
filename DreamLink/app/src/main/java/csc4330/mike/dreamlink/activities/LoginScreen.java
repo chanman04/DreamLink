@@ -35,9 +35,9 @@ public class LoginScreen extends ActionBarActivity {
     @Bind(R.id.email_ET) EditText emailEditText;
     @Bind(R.id.submit_button) Button submitButton;
 
-    private String userField;
-    private String passwordField;
-    private String emailField;
+    private String userField ="";
+    private String passwordField ="";
+    private String emailField ="";
 
     Context context;
 
@@ -51,6 +51,8 @@ public class LoginScreen extends ActionBarActivity {
         userEditText.setHint("username");
         passwordEditText.setHint("password");
         emailEditText.setHint("email");
+
+
 
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,18 +77,29 @@ public class LoginScreen extends ActionBarActivity {
                         emailEditText.setError("Your entry is not a valid email address");
 
                     }else {
-                        contact.setUserName(userEditText.getText().toString());
-                        contact.setUserPassword(passwordEditText.getText().toString());
-                        contact.setUserEmail(emailEditText.getText().toString());
 
-                        createParseUser(contact);
+                        userField = userEditText.getText().toString();
+                        passwordField = userEditText.getText().toString();
+                        emailField = userEditText.getText().toString();
+
+
+//                        userEditText.setText(userField);
+//                        passwordEditText.setText(passwordField);
+//                        emailEditText.setText(emailField);
+
+                        contact.setUserName(userField);
+                        contact.setUserPassword(passwordField);
+                        contact.setUserEmail(emailField);
+
+
+                        Toast.makeText(LoginScreen.this, "Your account was created successfully", Toast.LENGTH_SHORT).show();
+                        //createParseUser(contact);
 
                     }
                 }
                  catch (Exception e) {
 
-                     e.printStackTrace();
-                    Toast.makeText(context, "Please correct your entries and resubmit", Toast.LENGTH_SHORT);
+                    Toast.makeText(LoginScreen.this, "Please correct your entries and resubmit", Toast.LENGTH_SHORT).show();
                      return;
                 }
 
