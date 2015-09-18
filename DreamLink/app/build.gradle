@@ -4,6 +4,10 @@ android {
     compileSdkVersion 22
     buildToolsVersion "22.0.1"
 
+    repositories {
+        mavenCentral()
+    }
+    
     defaultConfig {
         applicationId "csc4330.mike.dreamlink"
         minSdkVersion 17
@@ -27,5 +31,6 @@ dependencies {
     compile 'com.google.android.gms:play-services:7.5.0'
     compile 'com.parse.bolts:bolts-android:1.+'
     compile fileTree(dir: 'libs', include: 'Parse-*.jar')
+    compile 'com.facebook.android:facebook-android-sdk:4.6.0'
 
 }

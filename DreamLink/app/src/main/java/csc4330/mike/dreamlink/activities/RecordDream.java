@@ -7,8 +7,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import java.io.IOException;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import csc4330.mike.dreamlink.R;
@@ -37,18 +35,18 @@ public class RecordDream extends ActionBarActivity {
         submitDreamButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                try{
-//
-//                    if(recordDreamET.getText().toString().isEmpty()){
-//                        recordDreamET.setError("You forgot to enter your dream!");
-//
-//                    }
-//
-//                }catch(IOException e){
-//
-//
-//
-//                }
+                try{
+
+                    if(recordDreamET.getText().toString().isEmpty()){
+                        recordDreamET.setError("You forgot to enter your dream!");
+
+                    }
+
+                }catch(Exception e){
+
+                    return;
+
+                }
             }
 
         });
