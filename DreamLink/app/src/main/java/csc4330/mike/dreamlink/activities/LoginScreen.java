@@ -36,15 +36,12 @@ import csc4330.mike.dreamlink.components.Contact;
  */
 public class LoginScreen extends ActionBarActivity {
 
-    @Bind(R.id.user_ET)
-    EditText userEditText;
-    @Bind(R.id.password_ET)
-    EditText passwordEditText;
-    @Bind(R.id.email_ET)
-    EditText emailEditText;
-    @Bind(R.id.submit_button)
-    Button submitButton;
+    @Bind(R.id.user_ET) EditText userEditText;
+    @Bind(R.id.password_ET) EditText passwordEditText;
+    @Bind(R.id.email_ET) EditText emailEditText;
+    @Bind(R.id.submit_button) Button submitButton;
     @Bind(R.id.fb_button) LoginButton facebookButton;
+    @Bind(R.id.signup_button) Button signupButton;
 
     private String userField ="";
     private String passwordField ="";
@@ -86,7 +83,6 @@ public class LoginScreen extends ActionBarActivity {
         emailEditText.setHint("email");
 
 
-
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,6 +90,8 @@ public class LoginScreen extends ActionBarActivity {
                 try {
 
                     Contact contact = new Contact();
+                    ParseUser user = new ParseUser();
+
 
                     //Check for a username
                     if (userEditText.getText().toString().isEmpty()) {
@@ -108,30 +106,27 @@ public class LoginScreen extends ActionBarActivity {
                     } else if (emailCheck(emailEditText.getText().toString()) == false) {
                         emailEditText.setError("Your entry is not a valid email address");
 
-                    }else {
+                    } else {
 
                         userField = userEditText.getText().toString();
                         passwordField = userEditText.getText().toString();
                         emailField = userEditText.getText().toString();
 
-
-//                        userEditText.setText(userField);
-//                        passwordEditText.setText(passwordField);
-//                        emailEditText.setText(emailField);
-
                         contact.setUserName(userField);
                         contact.setUserPassword(passwordField);
                         contact.setUserEmail(emailField);
 
+                        createParseUser(userField, passwordField, emailField);
 
                         Toast.makeText(LoginScreen.this, "Your account was created successfully", Toast.LENGTH_SHORT).show();
-                        //createParseUser(contact);
+
 
                     }
+
                 } catch (Exception e) {
 
                     Toast.makeText(LoginScreen.this, "Please correct your entries and resubmit", Toast.LENGTH_SHORT).show();
-                     return;
+                    return;
                 }
 
             }
@@ -165,34 +160,45 @@ public class LoginScreen extends ActionBarActivity {
                         });
             }
         });
-    }
 
-    public static ParseUser createParseUser(Contact contact) {
-
-        ParseUser user = new ParseUser();
-        user.setUsername(contact.getUserName());
-        user.setPassword(contact.getUserPassword());
-        user.setEmail(contact.getUserEmail());
-
-
-        // other fields can be set just like with ParseObject
-        user.signUpInBackground(new SignUpCallback() {
+        //Functionality for the Signup button
+        signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void done(com.parse.ParseException e) {
+            public void onClick(View v) {
+                Intent mainIntent = new Intent(LoginScreen.this, SignupActivity.class);
+                startActivity(mainIntent);
+                finish();
 
             }
 
-            public void done(ParseException e) {
+        });
+    }
+
+    public void createParseUser(String username, String password, String email) {
+
+        ParseUser user = new ParseUser();
+        user.setUsername(username);
+        user.setPassword(password);
+        user.setEmail(email);
+        user.signUpInBackground(new SignUpCallback() {
+
+            @Override
+            public void done(com.parse.ParseException e) {
+
                 if (e == null) {
-                    // Hooray! Let them use the app now.
+
+                    Toast.makeText(LoginScreen.this, "Your account was created successfully!", Toast.LENGTH_SHORT).show();
+                    Intent feedIntent = new Intent(LoginScreen.this, DreamFeed.class);
+                    startActivity(feedIntent);
+
                 } else {
-                    // Sign up didn't succeed. Look at the ParseException
-                    // to figure out what went wrong
+                    Toast.makeText(LoginScreen.this, "Parse didn't get yo shit!", Toast.LENGTH_SHORT).show();
+
                 }
             }
         });
 
-        return user;
+
     }
 
     public static boolean emailCheck(String email) {
