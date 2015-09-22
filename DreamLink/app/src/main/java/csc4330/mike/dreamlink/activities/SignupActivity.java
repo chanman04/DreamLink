@@ -33,6 +33,11 @@ public class SignupActivity extends ActionBarActivity {
     @Bind(R.id.login_button) Button loginButton;
     @Bind(R.id.error_TV)TextView errorResponseTV;
 
+    private String userField ="";
+    private String passwordField ="";
+    private String emailField ="";
+
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,8 +45,8 @@ public class SignupActivity extends ActionBarActivity {
         ButterKnife.bind(this);
 
         usernameET.setHint("Username");
-        usernameET.setHint("Password");
-        usernameET.setHint("Email");
+        passwordET.setHint("Password");
+        emailET.setHint("Email");
 
 
 
@@ -50,39 +55,39 @@ public class SignupActivity extends ActionBarActivity {
             public void onClick(View v) {
 
                 ParseUser user = new ParseUser();
+                userField = usernameET.getText().toString();
+                passwordField = passwordET.getText().toString();
+                emailField = emailET.getText().toString();
 
-                user.setUsername(usernameET.getText().toString());
-                user.setPassword(passwordET.getText().toString());
-                user.setEmail(emailET.getText().toString());
+                createParseUser(userField, passwordField, emailField);
 
-                errorResponseTV.setText("");
-                user.signUpInBackground(new SignUpCallback() {
-
-                    @Override
-                    public void done(ParseException e) {
-
-                        if (e == null){
-                            Intent feedIntent = new Intent(SignupActivity.this, DreamFeed.class);
-                            startActivity(feedIntent);
-                            finish();
-
-                        }else{
-                            switch(e.getCode()){
-                                case ParseException.USERNAME_MISSING:
-                                    usernameET.setError("You must supply a username");
-                                    break;
-                                case ParseException.PASSWORD_MISSING:
-                                    passwordET.setError("You must supply a password");
-                                    break;
-                                case ParseException.EMAIL_MISSING:
-                                    emailET.setError("You must supply a email address");
-                                    break;
-                            }
-
-                        }
-
-                    }
-                });
+//                user.signUpInBackground(new SignUpCallback() {
+//
+//                    @Override
+//                    public void done(ParseException e) {
+//
+//                        if (e == null){
+//                            Intent feedIntent = new Intent(SignupActivity.this, DreamFeed.class);
+//                            startActivity(feedIntent);
+//                            finish();
+//
+//                        }else{
+//                            switch(e.getCode()){
+//                                case ParseException.USERNAME_MISSING:
+//                                    usernameET.setError("You must supply a username");
+//                                    break;
+//                                case ParseException.PASSWORD_MISSING:
+//                                    passwordET.setError("You must supply a password");
+//                                    break;
+//                                case ParseException.EMAIL_MISSING:
+//                                    emailET.setError("You must supply a email address");
+//                                    break;
+//                            }
+//
+//                        }
+//
+//                    }
+//                });
 
             }
         });
@@ -98,13 +103,29 @@ public class SignupActivity extends ActionBarActivity {
         });
 
     }
-    public void signup(String username, String pass, String email){
+    public void createParseUser(String username, String password, String email) {
 
         ParseUser user = new ParseUser();
         user.setUsername(username);
-        user.setPassword(pass);;
+        user.setPassword(password);
         user.setEmail(email);
+        user.signUpInBackground(new SignUpCallback() {
 
+            @Override
+            public void done(com.parse.ParseException e) {
+
+                if (e == null) {
+
+                    Toast.makeText(SignupActivity.this, "Your account was created successfully!", Toast.LENGTH_SHORT).show();
+                    Intent feedIntent = new Intent(SignupActivity.this, RecordDream.class);
+                    startActivity(feedIntent);
+
+                } else {
+                    Toast.makeText(SignupActivity.this, "Parse didn't get yo shit!", Toast.LENGTH_SHORT).show();
+
+                }
+            }
+        });
 
 
     }

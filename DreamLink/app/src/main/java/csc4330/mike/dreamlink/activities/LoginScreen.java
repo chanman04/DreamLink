@@ -89,7 +89,6 @@ public class LoginScreen extends ActionBarActivity {
 
                 try {
 
-                    Contact contact = new Contact();
                     ParseUser user = new ParseUser();
 
 
@@ -112,19 +111,13 @@ public class LoginScreen extends ActionBarActivity {
                         passwordField = userEditText.getText().toString();
                         emailField = userEditText.getText().toString();
 
-                        contact.setUserName(userField);
-                        contact.setUserPassword(passwordField);
-                        contact.setUserEmail(emailField);
-
                         createParseUser(userField, passwordField, emailField);
-
-                        Toast.makeText(LoginScreen.this, "Your account was created successfully", Toast.LENGTH_SHORT).show();
 
 
                     }
 
                 } catch (Exception e) {
-
+                    e.printStackTrace();
                     Toast.makeText(LoginScreen.this, "Please correct your entries and resubmit", Toast.LENGTH_SHORT).show();
                     return;
                 }
