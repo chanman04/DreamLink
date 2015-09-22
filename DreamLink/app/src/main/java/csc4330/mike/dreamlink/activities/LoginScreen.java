@@ -6,9 +6,9 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -49,10 +49,8 @@ public class LoginScreen extends ActionBarActivity {
 
     private CallbackManager callbackManager;
     private LoginButton facebookLoginButton;
-    private TextView userInfo;
-    // private AccessToken accessToken;
+    //private AccessToken accessToken;
     //private AccessTokenTracker accessTokenTracker;
-    private String token;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,7 +61,6 @@ public class LoginScreen extends ActionBarActivity {
 
         setContentView(R.layout.activity_user_login);
 
-        userInfo = (TextView)findViewById(R.id.userInfo);
         facebookLoginButton = (LoginButton)findViewById(R.id.fb_button);
 
         /*
@@ -80,33 +77,31 @@ public class LoginScreen extends ActionBarActivity {
         accessToken = AccessToken.getCurrentAccessToken();
         */
 
-        if (token == null) {
+        if (AccessToken.getCurrentAccessToken() != null) {
             LoginManager.getInstance().logInWithReadPermissions(LoginScreen.this, Arrays.asList(
                     "email", "user_friends", "public_profile"));
         }
 
-        //facebookLoginButton.setReadPermissions(Arrays.asList("email", "user_friends", "public_profile"));
         LoginManager.getInstance().registerCallback(callbackManager,
                 new FacebookCallback<LoginResult>() {
                     @Override
                     public void onSuccess(LoginResult loginResult) {
-                        token = (
+                        /*
                                 "User ID: " + loginResult.getAccessToken().getUserId() + "\n"
                                         + "Auth Token: " + loginResult.getAccessToken().getToken()
-                        );
-                        userInfo.setText(token);
-                        //startActivity(new Intent(LoginScreen.this, DreamFeed.class));
+                        */
+                        startActivity(new Intent(LoginScreen.this, DreamFeed.class));
 
                     }
 
                     @Override
                     public void onCancel() {
-                        userInfo.setText("Login attempt canceled.");
+                        Toast.makeText(LoginScreen.this, "Login attempt canceled.", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onError(FacebookException exception) {
-                        userInfo.setText("Login attempt failed.");
+                        Toast.makeText(LoginScreen.this, "Login attempt failed.", Toast.LENGTH_SHORT).show();
                     }
                 });
 

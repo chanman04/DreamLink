@@ -6,6 +6,8 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.Button;
 
+import com.facebook.login.LoginManager;
+
 import csc4330.mike.dreamlink.R;
 
 /**
@@ -25,11 +27,12 @@ public class DreamFeed extends ActionBarActivity{
         //setSupportActionBar(mainToolbar);
         //getSupportActionBar().setTitle("Dream Feed");
 
-        Button back = (Button)findViewById(R.id.back);
+        Button back = (Button)findViewById(R.id.logout);
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                LoginManager.getInstance().logOut();
                 Intent backIntent = new Intent(DreamFeed.this, LoginScreen.class);
                 startActivity(backIntent);
             }
