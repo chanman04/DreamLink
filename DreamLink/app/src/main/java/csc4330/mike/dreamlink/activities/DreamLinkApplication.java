@@ -9,8 +9,11 @@ import com.parse.Parse;
  */
 public class DreamLinkApplication extends Application {
 
-//    public void onCreate() {
-//        Parse.initialize(this, "2BpAZP02XxiKszInLiS1ZTdGRf83pCfGSFhDCFX2", "2C8XUbmEYZLKoLejypoMKivrhVdVqWciE82PVHOA");
-//    }
+    public void onCreate() {
+        super.onCreate();
+        Parse.enableLocalDatastore(this);
+        Parse.initialize(this, "2BpAZP02XxiKszInLiS1ZTdGRf83pCfGSFhDCFX2", "2C8XUbmEYZLKoLejypoMKivrhVdVqWciE82PVHOA");
+
+    }
 
 }

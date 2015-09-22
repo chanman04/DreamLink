@@ -50,7 +50,7 @@
             android:id="@+id/userInfo"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:textSize="18sp"
+            android:textSize="20sp"
             />
 
 
