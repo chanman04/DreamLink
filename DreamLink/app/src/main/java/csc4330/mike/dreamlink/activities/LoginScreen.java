@@ -1,16 +1,14 @@
 package csc4330.mike.dreamlink.activities;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.facebook.AccessToken;
-import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -44,28 +42,31 @@ public class LoginScreen extends ActionBarActivity {
     EditText emailEditText;
     @Bind(R.id.submit_button)
     Button submitButton;
-    @Bind(R.id.fb_button)
-    LoginButton facebookButton;
 
     private String userField;
     private String passwordField;
     private String emailField;
 
-    Context context;
+    private CallbackManager callbackManager;
+    private LoginButton facebookLoginButton;
+    private TextView userInfo;
+    // private AccessToken accessToken;
+    //private AccessTokenTracker accessTokenTracker;
+    private String token;
 
-    CallbackManager callbackManager;
-    AccessTokenTracker accessTokenTracker;
-    AccessToken accessToken;
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         //Facebook
-        FacebookSdk.sdkInitialize(getApplicationContext());
+        FacebookSdk.sdkInitialize(this.getApplicationContext());
         callbackManager = CallbackManager.Factory.create();
-        LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile", "user_friends"));
-        //facebookButton.setReadPermissions("user_friends");
+
+        setContentView(R.layout.activity_user_login);
+
+        userInfo = (TextView)findViewById(R.id.userInfo);
+        facebookLoginButton = (LoginButton)findViewById(R.id.fb_button);
+
+        /*
         accessTokenTracker = new AccessTokenTracker() {
             @Override
             protected void onCurrentAccessTokenChanged(
@@ -77,9 +78,47 @@ public class LoginScreen extends ActionBarActivity {
         };
         // If the access token is available already assign it.
         accessToken = AccessToken.getCurrentAccessToken();
+        */
 
-        FacebookSdk.sdkInitialize(getApplicationContext());
-        setContentView(R.layout.activity_user_login);
+        if (token == null) {
+            LoginManager.getInstance().logInWithReadPermissions(LoginScreen.this, Arrays.asList(
+                    "email", "user_friends", "public_profile"));
+        }
+
+        //facebookLoginButton.setReadPermissions(Arrays.asList("email", "user_friends", "public_profile"));
+        LoginManager.getInstance().registerCallback(callbackManager,
+                new FacebookCallback<LoginResult>() {
+                    @Override
+                    public void onSuccess(LoginResult loginResult) {
+                        token = (
+                                "User ID: " + loginResult.getAccessToken().getUserId() + "\n"
+                                        + "Auth Token: " + loginResult.getAccessToken().getToken()
+                        );
+                        userInfo.setText(token);
+                        //startActivity(new Intent(LoginScreen.this, DreamFeed.class));
+
+                    }
+
+                    @Override
+                    public void onCancel() {
+                        userInfo.setText("Login attempt canceled.");
+                    }
+
+                    @Override
+                    public void onError(FacebookException exception) {
+                        userInfo.setText("Login attempt failed.");
+                    }
+                });
+
+        facebookLoginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LoginManager.getInstance().logInWithReadPermissions
+                        (LoginScreen.this, Arrays.asList(
+                                "email", "user_friends", "public_profile"));
+            }
+        });
+
         ButterKnife.bind(this);
 
         userEditText.setHint("username");
@@ -118,39 +157,9 @@ public class LoginScreen extends ActionBarActivity {
                 } catch (Exception e) {
 
                     e.printStackTrace();
-                    Toast.makeText(context, "Please correct your entries and resubmit", Toast.LENGTH_SHORT);
+                    Toast.makeText(LoginScreen.this, "Please correct your entries and resubmit", Toast.LENGTH_SHORT);
                     return;
                 }
-
-            }
-
-        });
-
-        facebookButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                LoginManager.getInstance().registerCallback(callbackManager,
-                        new FacebookCallback<LoginResult>() {
-                            @Override
-                            public void onSuccess(LoginResult loginResult) {
-                                Intent feedIntent = new Intent(LoginScreen.this, DreamFeed.class);
-                                startActivity(feedIntent);
-                            }
-
-                            @Override
-                            public void onCancel() {
-                                Intent mainIntent = new Intent(LoginScreen.this, LoginScreen.class);
-                                startActivity(mainIntent);
-                            }
-
-                            @Override
-                            public void onError(FacebookException exception) {
-                                Intent mainIntent = new Intent(LoginScreen.this, LoginScreen.class);
-                                startActivity(mainIntent);
-                                Toast.makeText(context, "An error has occured", Toast.LENGTH_SHORT);
-                            }
-                        });
             }
         });
     }
@@ -161,7 +170,6 @@ public class LoginScreen extends ActionBarActivity {
         user.setUsername(contact.getUserName());
         user.setPassword(contact.getUserPassword());
         user.setEmail(contact.getUserEmail());
-
 
         // other fields can be set just like with ParseObject
         user.signUpInBackground(new SignUpCallback() {
@@ -179,7 +187,6 @@ public class LoginScreen extends ActionBarActivity {
                 }
             }
         });
-
         return user;
     }
 
@@ -202,12 +209,6 @@ public class LoginScreen extends ActionBarActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         callbackManager.onActivityResult(requestCode, resultCode, data);
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        accessTokenTracker.stopTracking();
     }
 }
 
