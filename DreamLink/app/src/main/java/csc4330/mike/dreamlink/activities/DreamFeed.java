@@ -1,16 +1,13 @@
 package csc4330.mike.dreamlink.activities;
 
-import android.content.pm.ActivityInfo;
+import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.ExpandableListView;
-import android.widget.FrameLayout;
+import android.widget.Button;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
+import com.facebook.login.LoginManager;
+
 import csc4330.mike.dreamlink.R;
 
 /**
@@ -18,17 +15,28 @@ import csc4330.mike.dreamlink.R;
  */
 public class DreamFeed extends ActionBarActivity{
 
-    @Bind(R.id.toolbar) Toolbar mainToolbar;
-    @Bind(R.id.shopping_expandable_list)ExpandableListView shoppingListDisplay;
+    //@Bind(R.id.toolbar) Toolbar mainToolbar;
+    //@Bind(R.id.shopping_expandable_list)ExpandableListView shoppingListDisplay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dream_feed);
-        ButterKnife.bind(this);
+        //ButterKnife.bind(this);
 
-        setSupportActionBar(mainToolbar);
-        getSupportActionBar().setTitle("Dream Feed");
+        //setSupportActionBar(mainToolbar);
+        //getSupportActionBar().setTitle("Dream Feed");
+
+        Button back = (Button)findViewById(R.id.logout);
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LoginManager.getInstance().logOut();
+                Intent backIntent = new Intent(DreamFeed.this, LoginScreen.class);
+                startActivity(backIntent);
+            }
+        });
 
 
 

@@ -10,6 +10,9 @@ import com.parse.ParseUser;
  */
 public class DreamLinkApplication extends Application {
 
+//    public void onCreate() {
+//        Parse.initialize(this, "2BpAZP02XxiKszInLiS1ZTdGRf83pCfGSFhDCFX2", "2C8XUbmEYZLKoLejypoMKivrhVdVqWciE82PVHOA");
+//    }
 
     @Override
     public void onCreate(){

@@ -1,24 +1,24 @@
 package csc4330.mike.dreamlink.activities;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.facebook.AccessToken;
-import com.facebook.AccessTokenTracker;
-import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.parse.LogInCallback;
+import com.parse.ParseFacebookUtils;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 import com.parse.SignUpCallback;
 
 import java.text.ParseException;
@@ -47,35 +47,68 @@ public class LoginScreen extends ActionBarActivity {
     private String passwordField ="";
     private String emailField ="";
 
-    Context context;
+    private LoginButton facebookLoginButton;
 
-    CallbackManager callbackManager;
-    AccessTokenTracker accessTokenTracker;
-    AccessToken accessToken;
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //Facebook
-        FacebookSdk.sdkInitialize(getApplicationContext());
-        callbackManager = CallbackManager.Factory.create();
-        LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile", "user_friends"));
-        //facebookButton.setReadPermissions("user_friends");
-        accessTokenTracker = new AccessTokenTracker() {
-            @Override
-            protected void onCurrentAccessTokenChanged(
-                    AccessToken oldAccessToken,
-                    AccessToken currentAccessToken) {
-                // Set the access token using
-                // currentAccessToken when it's loaded or set.
-            }
-        };
-        // If the access token is available already assign it.
-        accessToken = AccessToken.getCurrentAccessToken();
+        FacebookSdk.sdkInitialize(this);
 
-        FacebookSdk.sdkInitialize(getApplicationContext());
+        ParseFacebookUtils.initialize(this);
+
         setContentView(R.layout.activity_user_login);
+
+        facebookLoginButton = (LoginButton)findViewById(R.id.fb_button);
+
+        facebookLoginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ParseFacebookUtils.logInWithReadPermissionsInBackground(LoginScreen.this,
+                        Arrays.asList("email", "user_friends", "public_profile"), new LogInCallback() {
+                    @Override
+                    public void done(final ParseUser user, com.parse.ParseException e) {
+                        if (user == null) {
+                            Log.d("MyApp", "The user cancelled the Facebook login.");
+
+                            Toast.makeText(getApplicationContext(), "Log-out from Facebook and try again please!", Toast.LENGTH_SHORT).show();
+
+                            ParseUser.logOut();
+                        } else if (user.isNew()) {
+                            Log.d("MyApp", "User signed up and logged in through Facebook!");
+
+                            if (!ParseFacebookUtils.isLinked(user)) {
+                                ParseFacebookUtils.linkWithReadPermissionsInBackground(user, LoginScreen.this,
+                                        Arrays.asList("email", "user_friends", "public_profile"), new SaveCallback() {
+                                    @Override
+                                    public void done(com.parse.ParseException e) {
+                                        if (ParseFacebookUtils.isLinked(user)) {
+                                            Log.d("MyApp", "User logged in with Facebook!");
+                                        }
+                                    }
+                                });
+                            } else {
+                                Toast.makeText(getApplicationContext(), "You can change your personal data in Settings tab!", Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            Log.d("MyApp", "User logged in through Facebook!");
+
+                            if (!ParseFacebookUtils.isLinked(user)) {
+                                ParseFacebookUtils.linkWithReadPermissionsInBackground(user, LoginScreen.this,
+                                        Arrays.asList("email", "user_friends", "public_profile"), new SaveCallback() {
+                                    @Override
+                                    public void done(com.parse.ParseException e) {
+                                        if (ParseFacebookUtils.isLinked(user)) {
+                                            Log.d("MyApp", "User logged in with Facebook!");
+                                        }
+                                    }
+                                });
+                            }
+                        }
+                    }
+                });
+            }
+        });
+
         ButterKnife.bind(this);
 
         userEditText.setHint("username");
@@ -121,51 +154,20 @@ public class LoginScreen extends ActionBarActivity {
                     Toast.makeText(LoginScreen.this, "Please correct your entries and resubmit", Toast.LENGTH_SHORT).show();
                     return;
                 }
-
-            }
-
-        });
-
-        facebookButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                LoginManager.getInstance().registerCallback(callbackManager,
-                        new FacebookCallback<LoginResult>() {
-                            @Override
-                            public void onSuccess(LoginResult loginResult) {
-                                Intent feedIntent = new Intent(LoginScreen.this, DreamFeed.class);
-                                startActivity(feedIntent);
-                            }
-
-                            @Override
-                            public void onCancel() {
-                                Intent mainIntent = new Intent(LoginScreen.this, LoginScreen.class);
-                                startActivity(mainIntent);
-                            }
-
-                            @Override
-                            public void onError(FacebookException exception) {
-                                Intent mainIntent = new Intent(LoginScreen.this, LoginScreen.class);
-                                startActivity(mainIntent);
-                                Toast.makeText(context, "An error has occured", Toast.LENGTH_SHORT);
-                            }
-                        });
             }
         });
 
-        //Functionality for the Signup button
         signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent mainIntent = new Intent(LoginScreen.this, SignupActivity.class);
-                startActivity(mainIntent);
-                finish();
 
+                Intent feedIntent = new Intent(LoginScreen.this, SignupActivity.class);
+                startActivity(feedIntent);
             }
-
         });
+
     }
+
 
     public void createParseUser(String username, String password, String email) {
 
@@ -191,7 +193,6 @@ public class LoginScreen extends ActionBarActivity {
             }
         });
 
-
     }
 
     public static boolean emailCheck(String email) {
@@ -201,7 +202,7 @@ public class LoginScreen extends ActionBarActivity {
         CharSequence inputStr = email;
 
         Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
-        ;
+
         Matcher matcher = pattern.matcher(inputStr);
         if (matcher.matches()) {
             isValid = true;
@@ -212,13 +213,7 @@ public class LoginScreen extends ActionBarActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        callbackManager.onActivityResult(requestCode, resultCode, data);
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        accessTokenTracker.stopTracking();
+        ParseFacebookUtils.onActivityResult(requestCode, resultCode, data);
     }
 }
 

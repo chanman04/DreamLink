@@ -10,7 +10,7 @@ android {
     
     defaultConfig {
         applicationId "csc4330.mike.dreamlink"
-        minSdkVersion 17
+        minSdkVersion 15
         targetSdkVersion 22
         multiDexEnabled = true
         versionCode 1
@@ -32,5 +32,7 @@ dependencies {
     compile 'com.parse.bolts:bolts-android:1.+'
     compile fileTree(dir: 'libs', include: 'Parse-*.jar')
     compile 'com.facebook.android:facebook-android-sdk:4.6.0'
+    compile fileTree('libs/Parse-1.10.2.jar')
+    compile fileTree('libs/ParseFacebookUtilsV4-1.10.2.jar')
 
 }
