@@ -2,6 +2,8 @@ package csc4330.mike.dreamlink.activities;
 
 import com.parse.ParseClassName;
 import com.parse.ParseObject;
+import com.parse.ParseRelation;
+import com.parse.ParseUser;
 
 /**
  * The class that Dreams are made of.
@@ -18,30 +20,37 @@ public class Dream extends ParseObject {
      */
     public Dream() {};
 
-    public void setTxt(String text) {
-        put("text",text);
+    public void setDream(String text) {put("text",text);
     }
 
-    public String getTxt() {
-        return getString("text");
+    public String getDream() {return getString("text");
     }
 
-    public void setTitle(String title) {
-        put("title",title);
+    public void setTitle(String title) {put("title",title);
     }
 
-    public String getTitle() {
-        return getString("title");
+    public String getTitle() {return getString("title");
+    }
+
+    public ParseUser getDreamer() {return (ParseUser)getParseObject("dreamer");
+    }
+
+    public void setDreamer(ParseUser dreamer) {put("dreamer",dreamer);
+    }
+
+    public ParseRelation<Hashtag> getHashtags() {
+        return getRelation("hashtags");
     }
 
     /**
      * Convenience constructor for setting up a brand new dream
      * @param title the title of the dream
-     * @param text the tex of the dream
+     * @param dream the tex of the dream
      */
-    public Dream(String title, String text) {
+    public Dream(String title, String dream) {
         super();
-        setTxt(text);
+        setDream(dream);
         setTitle(title);
+        //setDreamer(dreamer);
     }
 }
