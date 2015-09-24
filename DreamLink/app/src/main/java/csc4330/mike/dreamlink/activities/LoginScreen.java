@@ -9,7 +9,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.facebook.FacebookSdk;
 import com.facebook.login.widget.LoginButton;
 import com.parse.LogInCallback;
 import com.parse.ParseFacebookUtils;
@@ -50,9 +49,20 @@ public class LoginScreen extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        FacebookSdk.sdkInitialize(this);
-
-        ParseFacebookUtils.initialize(this);
+        /*
+        if(ParseUser.getCurrentUser() != null){
+            if(ParseFacebookUtils.isLinked(ParseUser.getCurrentUser())){
+                ParseFacebookUtils.logInWithReadPermissionsInBackground(LoginScreen.this,
+                        Arrays.asList("email", "user_friends", "public_profile"), new LogInCallback() {
+                            @Override
+                            public void done(final ParseUser user, com.parse.ParseException e) {
+                                Log.d("MyApp", "User auto logged in through Facebook!");
+                                startActivity(new Intent(LoginScreen.this, DreamFeed.class));
+                            }
+                        });
+            }
+        }
+        */
 
         setContentView(R.layout.activity_user_login);
 
@@ -81,12 +91,13 @@ public class LoginScreen extends ActionBarActivity {
                                     public void done(com.parse.ParseException e) {
                                         if (ParseFacebookUtils.isLinked(user)) {
                                             Log.d("MyApp", "User logged in with Facebook!");
+                                            startActivity(new Intent(LoginScreen.this, DreamFeed.class));
                                         }
                                     }
                                 });
                             } else {
-                                Toast.makeText(getApplicationContext(), "You can change your personal data in Settings tab!", Toast.LENGTH_SHORT).show();
-                            }
+                                startActivity(new Intent(LoginScreen.this, DreamFeed.class));
+                              }
                         } else {
                             Log.d("MyApp", "User logged in through Facebook!");
 
@@ -97,10 +108,11 @@ public class LoginScreen extends ActionBarActivity {
                                     public void done(com.parse.ParseException e) {
                                         if (ParseFacebookUtils.isLinked(user)) {
                                             Log.d("MyApp", "User logged in with Facebook!");
+                                            startActivity(new Intent(LoginScreen.this, DreamFeed.class));
                                         }
                                     }
                                 });
-                            }
+                            }startActivity(new Intent(LoginScreen.this, DreamFeed.class));
                         }
                     }
                 });
