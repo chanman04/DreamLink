@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.facebook.FacebookSdk;
 import com.parse.Parse;
+import com.parse.ParseObject;
 import com.parse.ParseFacebookUtils;
 import com.parse.ParseUser;
 import com.parse.ParseUser;
@@ -15,10 +16,15 @@ import com.parse.ParseUser;
  */
 public class DreamLinkApplication extends Application {
 
+//    public void onCreate() {
+//        Parse.initialize(this, "2BpAZP02XxiKszInLiS1ZTdGRf83pCfGSFhDCFX2", "2C8XUbmEYZLKoLejypoMKivrhVdVqWciE82PVHOA");
+//    }
 
     public void onCreate() {
         super.onCreate();
         Parse.enableLocalDatastore(this);
+        ParseObject.registerSubclass(Dream.class);
+        ParseObject.registerSubclass(Hashtag.class);
         Parse.initialize(this, "2BpAZP02XxiKszInLiS1ZTdGRf83pCfGSFhDCFX2", "2C8XUbmEYZLKoLejypoMKivrhVdVqWciE82PVHOA");
         FacebookSdk.sdkInitialize(this);
         ParseFacebookUtils.initialize(this);

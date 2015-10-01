@@ -6,4 +6,7 @@
         <item name="android:statusBarColor">@color/primary_dark</item>
     </style>
 
+    <style name="app_theme" parent="android:Theme.NoTitleBar">
+        <item name="android:windowBackground">@drawable/app_background</item>
+    </style>
 </resources>
