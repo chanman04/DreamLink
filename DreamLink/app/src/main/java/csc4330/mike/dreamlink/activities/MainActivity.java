@@ -47,7 +47,7 @@ public class MainActivity extends TabActivity {
     }
 
     public void openDreamUploadActivity(View b) {
-        Intent intent = new Intent(this, DreamUploadActivity.class);
+        Intent intent = new Intent(this, RecordDream.class);
         startActivity(intent);
     }
 }
