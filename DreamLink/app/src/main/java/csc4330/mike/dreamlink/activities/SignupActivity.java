@@ -121,7 +121,7 @@ public class SignupActivity extends ActionBarActivity {
                     startActivity(feedIntent);
 
                 } else {
-                    Toast.makeText(SignupActivity.this, "Parse didn't get yo shit!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignupActivity.this, "Parse didn't get your account", Toast.LENGTH_SHORT).show();
 
                 }
             }
