@@ -6,7 +6,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.Button;
 
-import com.facebook.login.LoginManager;
+import com.parse.ParseUser;
 
 import csc4330.mike.dreamlink.R;
 
@@ -32,9 +32,8 @@ public class DreamFeed extends ActionBarActivity{
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LoginManager.getInstance().logOut();
-                Intent backIntent = new Intent(DreamFeed.this, LoginScreen.class);
-                startActivity(backIntent);
+                ParseUser.logOut();
+                startActivity(new Intent(DreamFeed.this, LoginScreen.class));
             }
         });
 
