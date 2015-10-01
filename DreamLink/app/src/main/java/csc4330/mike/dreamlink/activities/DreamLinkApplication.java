@@ -8,6 +8,7 @@ import com.facebook.FacebookSdk;
 import com.parse.Parse;
 import com.parse.ParseFacebookUtils;
 import com.parse.ParseUser;
+import com.parse.ParseUser;
 
 /**
  * Created by Mike on 9/4/15.

@@ -5,7 +5,7 @@ package csc4330.mike.dreamlink.components;
  */
 public class Contact {
 
-   private String  userName;
+   private String  username;
    private  String password;
    private  String userEmail;
 
@@ -15,23 +15,23 @@ public class Contact {
 
     public Contact(String uName, String pWord, String uEmail){
 
-        userName = uName;
+        username = uName;
         password = pWord;
         userEmail = uEmail;
 
     }
 
     public String getUserName() {
-        return userName;
+        return username;
     }
 
     public void setUserName(String userName) {
-        this.userName = userName;
+        this.username = userName;
     }
 
 
     public String getUserEmail() {
-        return userName;
+        return userEmail;
     }
 
     public void setUserEmail(String email) {

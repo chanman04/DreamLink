@@ -9,6 +9,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.parse.LogInCallback;
 import com.parse.ParseFacebookUtils;
@@ -31,18 +36,16 @@ import csc4330.mike.dreamlink.components.Contact;
  */
 public class LoginScreen extends ActionBarActivity {
 
-    @Bind(R.id.user_ET)
-    EditText userEditText;
-    @Bind(R.id.password_ET)
-    EditText passwordEditText;
-    @Bind(R.id.email_ET)
-    EditText emailEditText;
-    @Bind(R.id.submit_button)
-    Button submitButton;
+    @Bind(R.id.user_ET) EditText userEditText;
+    @Bind(R.id.password_ET) EditText passwordEditText;
+    @Bind(R.id.email_ET) EditText emailEditText;
+    @Bind(R.id.submit_button) Button submitButton;
+    @Bind(R.id.fb_button) LoginButton facebookButton;
+    @Bind(R.id.signup_button) Button signupButton;
 
-    private String userField;
-    private String passwordField;
-    private String emailField;
+    private String userField ="";
+    private String passwordField ="";
+    private String emailField ="";
 
     private LoginButton facebookLoginButton;
 
@@ -125,13 +128,15 @@ public class LoginScreen extends ActionBarActivity {
         passwordEditText.setHint("password");
         emailEditText.setHint("email");
 
+
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 try {
 
-                    Contact contact = new Contact();
+                    ParseUser user = new ParseUser();
+
 
                     //Check for a username
                     if (userEditText.getText().toString().isEmpty()) {
@@ -147,47 +152,60 @@ public class LoginScreen extends ActionBarActivity {
                         emailEditText.setError("Your entry is not a valid email address");
 
                     } else {
-                        contact.setUserName(userEditText.getText().toString());
-                        contact.setUserPassword(passwordEditText.getText().toString());
-                        contact.setUserEmail(emailEditText.getText().toString());
 
-                        createParseUser(contact);
+                        userField = userEditText.getText().toString();
+                        passwordField = userEditText.getText().toString();
+                        emailField = userEditText.getText().toString();
+
+                        createParseUser(userField, passwordField, emailField);
+
 
                     }
-                } catch (Exception e) {
 
+                } catch (Exception e) {
                     e.printStackTrace();
-                    Toast.makeText(LoginScreen.this, "Please correct your entries and resubmit", Toast.LENGTH_SHORT);
+                    Toast.makeText(LoginScreen.this, "Please correct your entries and resubmit", Toast.LENGTH_SHORT).show();
                     return;
                 }
             }
         });
+
+        signupButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent feedIntent = new Intent(LoginScreen.this, SignupActivity.class);
+                startActivity(feedIntent);
+            }
+        });
+
     }
 
-    public static ParseUser createParseUser(Contact contact) {
+
+    public void createParseUser(String username, String password, String email) {
 
         ParseUser user = new ParseUser();
-        user.setUsername(contact.getUserName());
-        user.setPassword(contact.getUserPassword());
-        user.setEmail(contact.getUserEmail());
-
-        // other fields can be set just like with ParseObject
+        user.setUsername(username);
+        user.setPassword(password);
+        user.setEmail(email);
         user.signUpInBackground(new SignUpCallback() {
+
             @Override
             public void done(com.parse.ParseException e) {
 
-            }
-
-            public void done(ParseException e) {
                 if (e == null) {
-                    // Hooray! Let them use the app now.
+
+                    Toast.makeText(LoginScreen.this, "Your account was created successfully!", Toast.LENGTH_SHORT).show();
+                    Intent feedIntent = new Intent(LoginScreen.this, DreamFeed.class);
+                    startActivity(feedIntent);
+
                 } else {
-                    // Sign up didn't succeed. Look at the ParseException
-                    // to figure out what went wrong
+                    Toast.makeText(LoginScreen.this, "Parse didn't get yo shit!", Toast.LENGTH_SHORT).show();
+
                 }
             }
         });
-        return user;
+
     }
 
     public static boolean emailCheck(String email) {

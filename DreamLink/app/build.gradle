@@ -12,6 +12,7 @@ android {
         applicationId "csc4330.mike.dreamlink"
         minSdkVersion 15
         targetSdkVersion 22
+        multiDexEnabled = true
         versionCode 1
         versionName "1.0"
     }
@@ -27,6 +28,9 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:22.2.1'
     compile 'com.jakewharton:butterknife:7.0.1'
+    compile 'com.google.android.gms:play-services:7.5.0'
+    compile 'com.parse.bolts:bolts-android:1.+'
+    compile fileTree(dir: 'libs', include: 'Parse-*.jar')
     compile 'com.facebook.android:facebook-android-sdk:4.6.0'
     compile fileTree('libs/Parse-1.10.2.jar')
     compile fileTree('libs/ParseFacebookUtilsV4-1.10.2.jar')
