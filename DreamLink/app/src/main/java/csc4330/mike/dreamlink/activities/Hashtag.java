@@ -4,6 +4,8 @@ import com.parse.ParseClassName;
 import com.parse.ParseObject;
 import com.parse.ParseRelation;
 
+import csc4330.mike.dreamlink.components.Dream;
+
 /**
  * Created by Matthew Wolff on 9/23/2015.
  */

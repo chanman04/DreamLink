@@ -1,9 +1,11 @@
-package csc4330.mike.dreamlink.activities;
+package csc4330.mike.dreamlink.components;
 
 import com.parse.ParseClassName;
 import com.parse.ParseObject;
 import com.parse.ParseRelation;
 import com.parse.ParseUser;
+
+import csc4330.mike.dreamlink.activities.*;
 
 /**
  * The class that Dreams are made of.
@@ -38,7 +40,7 @@ public class Dream extends ParseObject {
     public void setDreamer(ParseUser dreamer) {put("dreamer",dreamer);
     }
 
-    public ParseRelation<Hashtag> getHashtags() {
+    public ParseRelation<csc4330.mike.dreamlink.activities.Hashtag> getHashtags() {
         return getRelation("hashtags");
     }
 

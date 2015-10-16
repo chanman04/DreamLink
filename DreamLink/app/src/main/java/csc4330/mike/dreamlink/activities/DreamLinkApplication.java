@@ -9,7 +9,8 @@ import com.parse.Parse;
 import com.parse.ParseObject;
 import com.parse.ParseFacebookUtils;
 import com.parse.ParseUser;
-import com.parse.ParseUser;
+
+import csc4330.mike.dreamlink.components.Dream;
 
 /**
  * Created by Mike on 9/4/15.
@@ -19,6 +20,23 @@ public class DreamLinkApplication extends Application {
 //    public void onCreate() {
 //        Parse.initialize(this, "2BpAZP02XxiKszInLiS1ZTdGRf83pCfGSFhDCFX2", "2C8XUbmEYZLKoLejypoMKivrhVdVqWciE82PVHOA");
 //    }
+private String username;
+    private static DreamLinkApplication singleInstance = null;
+
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setWagerLogLV(String user) {
+        this.username = user;
+    }
+
+    public static DreamLinkApplication getInstance()
+    {
+        return singleInstance;
+    }
+
 
     public void onCreate() {
         super.onCreate();
@@ -41,4 +59,5 @@ public class DreamLinkApplication extends Application {
         }
 
     }
+
 }
