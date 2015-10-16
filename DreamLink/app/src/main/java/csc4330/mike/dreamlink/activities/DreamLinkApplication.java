@@ -9,16 +9,18 @@ import com.parse.Parse;
 import com.parse.ParseObject;
 import com.parse.ParseFacebookUtils;
 import com.parse.ParseUser;
-import com.parse.ParseUser;
 
 /**
  * Created by Mike on 9/4/15.
  */
 public class DreamLinkApplication extends Application {
 
-//    public void onCreate() {
-//        Parse.initialize(this, "2BpAZP02XxiKszInLiS1ZTdGRf83pCfGSFhDCFX2", "2C8XUbmEYZLKoLejypoMKivrhVdVqWciE82PVHOA");
-//    }
+    public void onCreate() {
+        super.onCreate();
+        ParseObject.registerSubclass(Dream.class);
+        ParseObject.registerSubclass(Hashtag.class);
+        Parse.initialize(this, "2BpAZP02XxiKszInLiS1ZTdGRf83pCfGSFhDCFX2", "2C8XUbmEYZLKoLejypoMKivrhVdVqWciE82PVHOA");
+    }
 
     public void onCreate() {
         super.onCreate();
