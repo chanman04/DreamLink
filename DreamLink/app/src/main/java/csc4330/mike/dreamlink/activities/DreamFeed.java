@@ -7,16 +7,23 @@ import android.view.View;
 import android.widget.Button;
 
 import com.parse.ParseUser;
+import android.app.ListActivity;
+import android.widget.ArrayAdapter;
 
 import csc4330.mike.dreamlink.R;
 
 /**
  * Created by Mike on 9/4/15.
  */
-public class DreamFeed extends ActionBarActivity{
+public class DreamFeed extends ListActivity {
 
     //@Bind(R.id.toolbar) Toolbar mainToolbar;
     //@Bind(R.id.shopping_expandable_list)ExpandableListView shoppingListDisplay;
+    String[] itemname ={
+            "user1",
+            "user2",
+            "user3"
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +44,8 @@ public class DreamFeed extends ActionBarActivity{
             }
         });
 
-
-
+        this.setListAdapter(new ArrayAdapter<String>(
+                this, R.layout.dream_feed_list,
+                R.id.firstLine, itemname));
     }
-
 }
