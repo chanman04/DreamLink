@@ -19,6 +19,7 @@ import java.util.Stack;
 
 import butterknife.Bind;
 import csc4330.mike.dreamlink.R;
+import csc4330.mike.dreamlink.adapters.DreamAdapter;
 import csc4330.mike.dreamlink.components.Dream;
 
 /**
@@ -30,6 +31,7 @@ public class DreamFeed extends ActionBarActivity{
     @Bind(R.id.dream_log_LV) ListView dreamLogLV;
 
     private Stack<Dream> dreamLog = new Stack<>();
+    public DreamAdapter dreamAdapter;
     private String userName;
 
     @Override
@@ -89,7 +91,8 @@ public class DreamFeed extends ActionBarActivity{
             });
 
 
-
+            DreamAdapter dreamAdapter = new DreamAdapter(this, R.layout.row_layout_dreamlv, dreamLog);
+            dreamLogLV.setAdapter(dreamAdapter);
             dreamLogLV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

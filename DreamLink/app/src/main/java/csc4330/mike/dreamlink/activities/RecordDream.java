@@ -21,8 +21,8 @@ public class RecordDream extends ActionBarActivity {
 
 
     @Bind(R.id.toolbar) Toolbar mainToolbar;
-    @Bind(R.id.dream_title_et) EditText dreamTitleET;
-    @Bind(R.id.dream_et) EditText recordDreamET;
+    @Bind(R.id.dream_title_ET) EditText dreamTitleET;
+    @Bind(R.id.dream_ET) EditText recordDreamET;
     @Bind(R.id.submit_dream_button) Button submitDreamButton;
 
     private String dreamTitle = "";
