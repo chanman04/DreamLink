@@ -8,6 +8,12 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.parse.ParseFile;
+import com.parse.ParseImageView;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+import com.parse.ParseQueryAdapter;
+
 import java.util.Stack;
 
 import csc4330.mike.dreamlink.R;
@@ -16,60 +22,52 @@ import csc4330.mike.dreamlink.components.Dream;
 /**
  * Created by Mike on 10/20/15.
  */
-public class DreamAdapter extends ArrayAdapter<Dream> {
+public class DreamAdapter extends ParseQueryAdapter<Dream> {
 
-    static Context context;
-    static int layoutResourceId;
-    Stack<Dream> data = new Stack<>();
-
-    public DreamAdapter(Context context, int layoutResourceId, Stack<Dream> data) {
-        super(context, layoutResourceId, data);
-        this.layoutResourceId = layoutResourceId;
-        this.context = context;
-        /*for (Dream d : this.data) {
-            data.push(d);
-        }
-        ;*/
-        this.data = data;
+    public DreamAdapter(Context context, Class<? extends ParseObject> clazz) {
+        super(context, clazz);
     }
 
+    public class WagerLogAdapter extends ParseQueryAdapter<ParseObject> {
 
-    public long getItemId(int position) {
-        return position;
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        View row = convertView;
-        DreamHolder holder = null;
-
-        if(row == null)
-        {
-            LayoutInflater inflater = ((Activity)context).getLayoutInflater();
-            row = inflater.inflate(layoutResourceId, parent, false);
-            //row.setMinimumHeight(200);
-            holder = new DreamHolder();
-            holder.dreamTitle = (TextView)row.findViewById(R.id.dreamTitle);
-            holder.dreamEntry = (TextView)row.findViewById(R.id.dreamEntry);
-
-            row.setTag(holder);
-        }
-        else
-        {
-            holder = (DreamHolder)row.getTag();
+        public WagerLogAdapter(Context context) {
+            // Use the QueryFactory to construct a PQA that will only show
+            // Todos marked as high-pri
+            super(context, new ParseQueryAdapter.QueryFactory<ParseObject>() {
+                public ParseQuery create() {
+                    ParseQuery query = new ParseQuery("Wager");
+                    query.whereEqualTo("RESULT", "W");
+                    return query;
+                }
+            });
         }
 
-        Dream dream = data.elementAt(position);
-        holder.dreamTitle.setText(dream.getTitle());
-        holder.dreamEntry.setText(dream.getDream());
+        // Customize the layout by overriding getItemView
+        @Override
+        public View getItemView(ParseObject object, View v, ViewGroup parent) {
+            if (v == null) {
+                v = View.inflate(getContext(), R.layout.row_layout_dreamlv, null);
+            }
 
-        return row;
-    }
+            super.getItemView(object, v, parent);
 
-    static class DreamHolder
-    {
-        TextView dreamTitle;
-        TextView dreamEntry;
+            // Add and download the image
+            ParseImageView todoImage = (ParseImageView) v.findViewById(R.id.icon);
+            ParseFile imageFile = object.getParseFile("image");
+            if (imageFile != null) {
+                todoImage.setParseFile(imageFile);
+                todoImage.loadInBackground();
+            }
+
+            // Add the title view
+            TextView titleTextView = (TextView) v.findViewById(R.id.dreamTitle);
+            titleTextView.setText(object.getString("title"));
+
+            // Add a reminder of how long this item has been outstanding
+            TextView timestampView = (TextView) v.findViewById(R.id.dreamEntry);
+            timestampView.setText(object.getCreatedAt().toString());
+            return v;
+        }
+
     }
 }
-

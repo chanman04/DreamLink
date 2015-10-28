@@ -31,9 +31,8 @@ dependencies {
     compile 'com.jakewharton:butterknife:7.0.1'
     compile 'com.google.android.gms:play-services:7.5.0'
     compile 'com.parse.bolts:bolts-android:1.+'
-    compile fileTree(dir: 'libs', include: 'Parse-*.jar')
+    compile 'com.parse:parse-android:1.+'
     compile 'com.facebook.android:facebook-android-sdk:4.6.0'
-    compile fileTree('libs/Parse-1.10.2.jar')
     compile fileTree('libs/ParseFacebookUtilsV4-1.10.2.jar')
 
 }

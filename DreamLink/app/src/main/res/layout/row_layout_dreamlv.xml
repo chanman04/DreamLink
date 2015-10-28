@@ -1,35 +1,28 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:padding="10dp" >
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" >
+
+    <com.parse.ParseImageView
+        android:id="@+id/icon"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="15dip"
+        android:layout_marginRight="15dip" />
 
     <TextView
-        android:id="@+id/dreamTitle"
+        android:id="@+id/dream_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_marginBottom="2dp"
-        android:layout_marginTop="2dp"
-        android:gravity="center_vertical"
-        android:padding="2dip"
-        android:textColor="#736F6E"
-        android:textSize="22sp"
-        android:textStyle="bold" />
+        android:layout_alignTop="@+id/icon"
+        android:layout_toRightOf="@id/icon"
+        android:textColor="#FF0000" />
 
     <TextView
-        android:id="@+id/dreamEntry"
+        android:id="@+id/dream_entry"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@id/dreamTitle"
-        android:layout_marginBottom="2dp"
-        android:layout_marginTop="2dp"
-        android:gravity="center_vertical"
-        android:padding="2dip"
-        android:textColor="#736F6E"
-        android:textSize="12sp"
-        android:textStyle="bold" />
+        android:layout_below="@+id/dream_title"
+        android:layout_toRightOf="@id/icon" />
 
-</RelativeLayout>
+</RelativeLayout> 
