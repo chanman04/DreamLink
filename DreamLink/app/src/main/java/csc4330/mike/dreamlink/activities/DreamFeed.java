@@ -6,6 +6,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.ListView;
 
@@ -13,6 +14,7 @@ import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ParseQueryAdapter;
 
 import java.util.List;
 import java.util.Stack;
@@ -28,7 +30,10 @@ import csc4330.mike.dreamlink.components.Dream;
 public class DreamFeed extends ActionBarActivity{
 
     @Bind(R.id.toolbar) Toolbar mainToolbar;
-    @Bind(R.id.dream_log_LV) ListView dreamLogLV;
+    private ListView dreamLogLV;
+    private ParseQueryAdapter<ParseObject> mainAdapter;
+    private DreamAdapter dreamAdapter;
+
 
     private Stack<Dream> dreamLog = new Stack<>();
     public DreamAdapter dreamAdapter;
@@ -44,61 +49,26 @@ public class DreamFeed extends ActionBarActivity{
             DreamLinkApplication dreamLink = DreamLinkApplication.getInstance();
             userName = dreamLink.getUsername();
 
-            //ParseQuery to pull all this user's dreams using the global username we pulled up there ^
-            ParseQuery<ParseObject> parseQuery = ParseQuery.getQuery("DREAM");
-            parseQuery.whereEqualTo("USER", userName);
-            parseQuery.findInBackground(new FindCallback<ParseObject>() {
+        // Initialize main ParseQueryAdapter
+        mainAdapter = new ParseQueryAdapter<ParseObject>(this, "Todo");
+        mainAdapter.setTextKey("title");
+        mainAdapter.setImageKey("image");
 
-                //Error check for ParseQuery
-                @Override
-                public void done(List<ParseObject> objects, ParseException e) {
-                    if (e == null) {
-                        for (ParseObject dreamParseObj : objects) {
+        // Initialize the subclass of ParseQueryAdapter
+        dreamAdapter = new DreamAdapter(this);
 
-//                        Base case we setup to query from Parse take Wager objects from cloud and set
-//                        their values to a local Wager object we display in our ListView.
-//
-//                        In the future we to setup to query for specific Wager objects
-//                        FootballWager objects, NBAWager objects etc...
+        // Initialize ListView and set initial view to mainAdapter
+        dreamLogLV = (ListView) findViewById(R.id.dream_log_LV);
+        dreamLogLV.setAdapter(mainAdapter);
+        mainAdapter.loadObjects();
 
+        dreamLogLV.setAdapter(dreamAdapter);
+        dreamAdapter.loadObjects();
 
-                            //retrieve the instance variables for the Dream object from Parse
-                            dreamParseObj.get("DREAM_TITLE");
-                            dreamParseObj.get("DREAM_ENTRY");
+            
 
 
-                            //May need placeholder variables in between ParseWagerObjects and Local Wager Obj
-                            String titlePH = dreamParseObj.get("DREAM_TITLE").toString();
-                            String entryPH = dreamParseObj.get("DREAM_ENTRY").toString();
 
-                            //Setter taking value from Parse Wager Obj --> Wager Obj
-                            Dream dreamObj = new Dream();
-                            dreamObj.setTitle(titlePH);
-                            dreamObj.setDream(entryPH);
-
-
-                            //Finally we add Dream objects into our Stack so we can pop them off one by one and display
-                            dreamLog.push(dreamObj);
-
-
-                        }
-                        Log.d("score", "Retrieved " + objects.size() + " scores");
-
-                    } else {
-                        Log.d("score", "Error: " + e.getMessage());
-                    }
-                }
-            });
-
-
-            DreamAdapter dreamAdapter = new DreamAdapter(this, R.layout.row_layout_dreamlv, dreamLog);
-            dreamLogLV.setAdapter(dreamAdapter);
-            dreamLogLV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                }
-            });
 
         }
 

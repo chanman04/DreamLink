@@ -35,8 +35,7 @@ public class DreamAdapter extends ParseQueryAdapter<Dream> {
             // Todos marked as high-pri
             super(context, new ParseQueryAdapter.QueryFactory<ParseObject>() {
                 public ParseQuery create() {
-                    ParseQuery query = new ParseQuery("Wager");
-                    query.whereEqualTo("RESULT", "W");
+                    ParseQuery query = new ParseQuery("DREAM");
                     return query;
                 }
             });
@@ -51,20 +50,12 @@ public class DreamAdapter extends ParseQueryAdapter<Dream> {
 
             super.getItemView(object, v, parent);
 
-            // Add and download the image
-            ParseImageView todoImage = (ParseImageView) v.findViewById(R.id.icon);
-            ParseFile imageFile = object.getParseFile("image");
-            if (imageFile != null) {
-                todoImage.setParseFile(imageFile);
-                todoImage.loadInBackground();
-            }
-
             // Add the title view
-            TextView titleTextView = (TextView) v.findViewById(R.id.dreamTitle);
+            TextView titleTextView = (TextView) v.findViewById(R.id.dream_title);
             titleTextView.setText(object.getString("title"));
 
             // Add a reminder of how long this item has been outstanding
-            TextView timestampView = (TextView) v.findViewById(R.id.dreamEntry);
+            TextView timestampView = (TextView) v.findViewById(R.id.dream_entry);
             timestampView.setText(object.getCreatedAt().toString());
             return v;
         }
