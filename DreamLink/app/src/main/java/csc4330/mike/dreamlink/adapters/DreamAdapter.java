@@ -22,43 +22,37 @@ import csc4330.mike.dreamlink.components.Dream;
 /**
  * Created by Mike on 10/20/15.
  */
-public class DreamAdapter extends ParseQueryAdapter<Dream> {
-
-    public DreamAdapter(Context context, Class<? extends ParseObject> clazz) {
-        super(context, clazz);
+public class DreamAdapter extends ParseQueryAdapter<ParseObject>{
+    public DreamAdapter(Context context, final String username){
+        super(context, new ParseQueryAdapter.QueryFactory<ParseObject>(){
+            public ParseQuery create(){
+                ParseQuery query = new ParseQuery("DREAM");
+                //query.whereEqualTo("username", username); //username not yet linked to dreams on parse?
+                query.whereEqualTo("test", true); //just testing
+                //need to link dreams to users
+                return query;
+            }
+        });
     }
 
-    public class WagerLogAdapter extends ParseQueryAdapter<ParseObject> {
-
-        public WagerLogAdapter(Context context) {
-            // Use the QueryFactory to construct a PQA that will only show
-            // Todos marked as high-pri
-            super(context, new ParseQueryAdapter.QueryFactory<ParseObject>() {
-                public ParseQuery create() {
-                    ParseQuery query = new ParseQuery("DREAM");
-                    return query;
-                }
-            });
+    @Override
+    public View getItemView(ParseObject object, View v, ViewGroup parent){
+        //View row = convertView;
+        //DreamHolder holder = null;
+        if(v == null) {
+            v = View.inflate(getContext(), R.layout.row_layout_dreamlv, null);
         }
 
-        // Customize the layout by overriding getItemView
-        @Override
-        public View getItemView(ParseObject object, View v, ViewGroup parent) {
-            if (v == null) {
-                v = View.inflate(getContext(), R.layout.row_layout_dreamlv, null);
-            }
+        super.getItemView(object, v, parent);
 
-            super.getItemView(object, v, parent);
+        // Add the title view
+        TextView titleTextView = (TextView) v.findViewById(R.id.dream_title);
+        titleTextView.setText(object.getString("DREAM_TITLE"));
 
-            // Add the title view
-            TextView titleTextView = (TextView) v.findViewById(R.id.dream_title);
-            titleTextView.setText(object.getString("title"));
+        //Add the entry view
+        TextView entryTextView = (TextView) v.findViewById(R.id.dream_entry);
+        entryTextView.setText(object.getString("DREAM_ENTRY"));
 
-            // Add a reminder of how long this item has been outstanding
-            TextView timestampView = (TextView) v.findViewById(R.id.dream_entry);
-            timestampView.setText(object.getCreatedAt().toString());
-            return v;
-        }
-
+        return v;
     }
 }

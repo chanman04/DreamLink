@@ -1,5 +1,6 @@
 package csc4330.mike.dreamlink.activities;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
@@ -27,17 +28,17 @@ import csc4330.mike.dreamlink.components.Dream;
 /**
  * Created by Mike on 9/4/15.
  */
-public class DreamFeed extends ActionBarActivity{
+public class DreamFeed extends Activity{
 
     @Bind(R.id.toolbar) Toolbar mainToolbar;
     private ListView dreamLogLV;
     private ParseQueryAdapter<ParseObject> mainAdapter;
-    private DreamAdapter dreamAdapter;
+
 
 
     private Stack<Dream> dreamLog = new Stack<>();
-    public DreamAdapter dreamAdapter;
-    private String userName;
+    private DreamAdapter dreamAdapter;
+    private String userName = "captaincrunch";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,13 +50,11 @@ public class DreamFeed extends ActionBarActivity{
             DreamLinkApplication dreamLink = DreamLinkApplication.getInstance();
             userName = dreamLink.getUsername();
 
-        // Initialize main ParseQueryAdapter
-        mainAdapter = new ParseQueryAdapter<ParseObject>(this, "Todo");
-        mainAdapter.setTextKey("title");
-        mainAdapter.setImageKey("image");
 
         // Initialize the subclass of ParseQueryAdapter
-        dreamAdapter = new DreamAdapter(this);
+        dreamAdapter = new DreamAdapter(this, userName);
+        dreamLogLV.setAdapter(dreamAdapter);
+        dreamAdapter.loadObjects();
 
         // Initialize ListView and set initial view to mainAdapter
         dreamLogLV = (ListView) findViewById(R.id.dream_log_LV);
@@ -65,7 +64,7 @@ public class DreamFeed extends ActionBarActivity{
         dreamLogLV.setAdapter(dreamAdapter);
         dreamAdapter.loadObjects();
 
-            
+
 
 
 
