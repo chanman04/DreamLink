@@ -15,12 +15,6 @@ import com.parse.ParseUser;
  */
 public class DreamLinkApplication extends Application {
 
-    public void onCreate() {
-        super.onCreate();
-        ParseObject.registerSubclass(Dream.class);
-        ParseObject.registerSubclass(Hashtag.class);
-        Parse.initialize(this, "2BpAZP02XxiKszInLiS1ZTdGRf83pCfGSFhDCFX2", "2C8XUbmEYZLKoLejypoMKivrhVdVqWciE82PVHOA");
-    }
 
     public void onCreate() {
         super.onCreate();

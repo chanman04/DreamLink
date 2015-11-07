@@ -16,7 +16,7 @@
         android:layout_gravity="center_horizontal" />
 
     <EditText
-        android:id="@+id/dream_title_ET"
+        android:id="@+id/dream_title_et"
         android:layout_width="250sp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -32,7 +32,7 @@
         android:layout_gravity="center_horizontal" />
 
     <EditText
-        android:id="@+id/dream_ET"
+        android:id="@+id/dream_et"
         android:layout_width="350sp"
         android:layout_height="wrap_content"
         android:inputType="textMultiLine"
@@ -60,6 +60,13 @@
         android:layout_gravity="center_horizontal"
         android:layout_weight="0.12"
         android:hint="#hashtags...."/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submit Your Dream"
+        android:id="@+id/submit_dream_button"
+        android:layout_gravity="center_horizontal" />
 
 
 </LinearLayout>
