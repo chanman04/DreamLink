@@ -5,21 +5,31 @@
     android:layout_height="match_parent">
 
     <include
-        layout="@layout/toolbar">
+        layout="@layout/toolbar"
+        android:id="@+id/include">
 
     </include>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="55dip">
+        android:layout_marginTop="55dip"
+        android:id="@+id/relativeLayout">
 
-        <ExpandableListView
-            android:id="@+id/shopping_expandable_list"
+        <ListView
+            android:id="@+id/android:list"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent">
-        </ExpandableListView>
+        </ListView>
 
     </RelativeLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Log Out"
+        android:id="@+id/logout"
+        android:layout_alignBottom="@+id/include"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

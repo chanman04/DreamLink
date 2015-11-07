@@ -4,6 +4,34 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <include
+        layout="@layout/toolbar">
+
+    </include>
+
+    <LinearLayout
+        android:id="@+id/edit_field_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="90dp"
+        android:orientation="vertical"
+        android:layout_gravity="center">
+
+        <com.facebook.login.widget.LoginButton
+            android:id="@+id/fb_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="30dp" />
+
+    <TextView
+        android:id="@+id/pick_login_TV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/pick_login_text"
+        android:gravity="center"/>
+
     <EditText
         android:id="@+id/user_ET"
         android:layout_width="match_parent"
@@ -24,5 +52,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/submit_button_text"/>
+
+    <Button
+        android:id="@+id/signup_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sign Up"/>
+
+
+    </LinearLayout>
 
 </LinearLayout>

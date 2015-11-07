@@ -1,35 +1,51 @@
 package csc4330.mike.dreamlink.activities;
 
-import android.content.pm.ActivityInfo;
+import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.ExpandableListView;
-import android.widget.FrameLayout;
+import android.widget.Button;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
+import com.parse.ParseUser;
+import android.app.ListActivity;
+import android.widget.ArrayAdapter;
+
 import csc4330.mike.dreamlink.R;
 
 /**
  * Created by Mike on 9/4/15.
  */
-public class DreamFeed extends ActionBarActivity{
+public class DreamFeed extends ListActivity {
 
-    @Bind(R.id.toolbar) Toolbar mainToolbar;
-    @Bind(R.id.shopping_expandable_list)ExpandableListView shoppingListDisplay;
+    //@Bind(R.id.toolbar) Toolbar mainToolbar;
+    //@Bind(R.id.shopping_expandable_list)ExpandableListView shoppingListDisplay;
+    String[] itemname ={
+            "user1",
+            "user2",
+            "user3"
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dream_feed);
-        ButterKnife.bind(this);
+        //ButterKnife.bind(this);
 
-        setSupportActionBar(mainToolbar);
-        getSupportActionBar().setTitle("Dream Feed");
+        //setSupportActionBar(mainToolbar);
+        //getSupportActionBar().setTitle("Dream Feed");
 
+        Button back = (Button)findViewById(R.id.logout);
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ParseUser.logOut();
+                startActivity(new Intent(DreamFeed.this, LoginScreen.class));
+            }
+        });
+
+        this.setListAdapter(new ArrayAdapter<String>(
+                this, R.layout.dream_feed_list,
+                R.id.firstLine, itemname));
     }
-
 }
