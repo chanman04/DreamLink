@@ -1,6 +1,7 @@
 package csc4330.mike.dreamlink.activities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
@@ -31,41 +32,42 @@ import csc4330.mike.dreamlink.components.Dream;
 public class DreamFeed extends Activity{
 
     @Bind(R.id.toolbar) Toolbar mainToolbar;
-    private ListView dreamLogLV;
-    private ParseQueryAdapter<ParseObject> mainAdapter;
-
-
-
-    private Stack<Dream> dreamLog = new Stack<>();
     private DreamAdapter dreamAdapter;
+    private ListView listView;
+    private Button createDreamButton;
     private String userName = "captaincrunch";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dream_feed);
+        setContentView(R.layout.dream_view);
+        //ButterKnife.bind(this);
 
-
-            //Get a instance off the app to pull the global username we are storing for this app user
-            DreamLinkApplication dreamLink = DreamLinkApplication.getInstance();
-            userName = dreamLink.getUsername();
-
-
-        // Initialize the subclass of ParseQueryAdapter
         dreamAdapter = new DreamAdapter(this, userName);
-        dreamLogLV.setAdapter(dreamAdapter);
+        //dreamFragment = new DreamFragment();
+        //dreamFragment.setArguments(???);
+
+        listView = (ListView) findViewById(R.id.dream_list);
+        listView.setAdapter(dreamAdapter);
         dreamAdapter.loadObjects();
 
-        // Initialize ListView and set initial view to mainAdapter
-        dreamLogLV = (ListView) findViewById(R.id.dream_log_LV);
-        dreamLogLV.setAdapter(mainAdapter);
-        mainAdapter.loadObjects();
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //String item = (String) parent.getItemAtPosition(position); this doesnt work
+                //String item = dreamAdapter.getItem(position).toString();
+                //Toast.makeText(DreamLog.this, "CLICK: "+item, Toast.LENGTH_SHORT).show(); //how to get actual object values and stuff?
+                //below change RecordDream.class to whatever Dream Interpretation class that is made
 
-        dreamLogLV.setAdapter(dreamAdapter);
-        dreamAdapter.loadObjects();
+                String parseObjectId = dreamAdapter.getItem(position).getObjectId();
 
+                Intent intent = new Intent(DreamFeed.this, DreamInterpreter.class);
+                intent.putExtra("parse_obj_id", parseObjectId);
+                startActivity(intent);
 
-
+                //or just switch adapter to new layout? what do?
+            }
+        });
 
 
 
