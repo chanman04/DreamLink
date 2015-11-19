@@ -2,7 +2,6 @@ package csc4330.mike.dreamlink.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,7 +20,7 @@ import csc4330.mike.dreamlink.R;
 public class RecordDream extends ActionBarActivity {
 
 
-    @Bind(R.id.toolbar) Toolbar mainToolbar;
+    //@Bind(R.id.toolbar) Toolbar mainToolbar;
     @Bind(R.id.dream_title_ET) EditText dreamTitleET;
     @Bind(R.id.dream_ET) EditText recordDreamET;
     @Bind(R.id.submit_dream_button) Button submitDreamButton;
@@ -35,8 +34,8 @@ public class RecordDream extends ActionBarActivity {
         setContentView(R.layout.activity_record_dream);
         ButterKnife.bind(this);
 
-        setSupportActionBar(mainToolbar);
-        getSupportActionBar().setTitle("Post Your Dream");
+        //setSupportActionBar(mainToolbar);
+        //getSupportActionBar().setTitle("Post Your Dream");
 
         dreamTitleET.setHint("Give your dream a title");
         recordDreamET.setHint("Record your dream");
