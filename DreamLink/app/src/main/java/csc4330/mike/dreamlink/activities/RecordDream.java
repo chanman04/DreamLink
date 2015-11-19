@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.parse.ParseObject;
+import com.parse.ParseUser;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -57,6 +58,7 @@ public class RecordDream extends ActionBarActivity {
                         ParseObject userDream = new ParseObject("DREAM");
                         userDream.put("DREAM_TITLE",dreamTitle);
                         userDream.put("DREAM_ENTRY",dreamEntry);
+                        userDream.put("DREAMER", ParseUser.getCurrentUser());
                         userDream.saveInBackground();
                         Toast.makeText(RecordDream.this, "Thanks for sharing your dream", Toast.LENGTH_SHORT).show();
                     }

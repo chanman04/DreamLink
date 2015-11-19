@@ -1,23 +1,16 @@
 package csc4330.mike.dreamlink.adapters;
 
-import android.app.Activity;
 import android.content.Context;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.parse.ParseFile;
-import com.parse.ParseImageView;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseQueryAdapter;
-
-import java.util.Stack;
+import com.parse.ParseUser;
 
 import csc4330.mike.dreamlink.R;
-import csc4330.mike.dreamlink.components.Dream;
 
 /**
  * Created by Mike on 10/20/15.
@@ -28,7 +21,7 @@ public class DreamAdapter extends ParseQueryAdapter<ParseObject>{
             public ParseQuery create(){
                 ParseQuery query = new ParseQuery("DREAM");
                 //query.whereEqualTo("username", username); //username not yet linked to dreams on parse?
-                query.whereEqualTo("test", true); //just testing
+                query.whereEqualTo("DREAMER", ParseUser.getCurrentUser()); //just testing
                 //need to link dreams to users
                 return query;
             }
