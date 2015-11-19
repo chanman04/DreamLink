@@ -40,7 +40,7 @@ public class DreamAdapter extends ParseQueryAdapter<ParseObject>{
         //View row = convertView;
         //DreamHolder holder = null;
         if(v == null) {
-            v = View.inflate(getContext(), R.layout.row_layout_dreamlv, null);
+            v = View.inflate(getContext(), R.layout.dream_layout, null);
         }
 
         super.getItemView(object, v, parent);

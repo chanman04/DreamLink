@@ -9,11 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.facebook.FacebookCallback;
-import com.facebook.FacebookException;
-import com.facebook.FacebookSdk;
-import com.facebook.login.LoginManager;
-import com.facebook.login.LoginResult;
+
 import com.facebook.login.widget.LoginButton;
 import com.parse.LogInCallback;
 import com.parse.ParseFacebookUtils;
@@ -40,7 +36,7 @@ public class LoginScreen extends ActionBarActivity {
     @Bind(R.id.password_ET) EditText passwordEditText;
     @Bind(R.id.email_ET) EditText emailEditText;
     @Bind(R.id.submit_button) Button submitButton;
-    @Bind(R.id.fb_button) LoginButton facebookButton;
+//    @Bind(R.id.fb_button) LoginButton facebookButton;
     @Bind(R.id.signup_button) Button signupButton;
 
     private String userField ="";
