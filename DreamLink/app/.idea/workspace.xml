@@ -10,14 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c419366f-132e-404b-ac3b-e1d1d2a171ab" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/ParseCrashReporting_1_10_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/res/layout/activity_dream_feed.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/csc4330/mike/dreamlink/adapters/DreamAdapter.java" afterPath="$PROJECT_DIR$/src/main/java/csc4330/mike/dreamlink/adapters/DreamAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/csc4330/mike/dreamlink/activities/DreamFeed.java" afterPath="$PROJECT_DIR$/src/main/java/csc4330/mike/dreamlink/activities/DreamFeed.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.iml" afterPath="$PROJECT_DIR$/app.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/res/layout/dream_view.xml" afterPath="$PROJECT_DIR$/src/main/res/layout/dream_view.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/local.properties" afterPath="$PROJECT_DIR$/local.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/src/main/AndroidManifest.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="app.iws" />
@@ -39,12 +32,22 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="AndroidManifest.xml" pinned="false" current-in-tab="false">
+      <file leaf-file-name="AndroidManifest.xml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/AndroidManifest.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="29" column="38" selection-start-line="29" selection-start-column="38" selection-end-line="29" selection-end-column="38" />
-              <folding />
+            <state vertical-scroll-proportion="0.85623">
+              <caret line="55" column="49" selection-start-line="55" selection-start-column="49" selection-end-line="55" selection-end-column="49" />
+              <folding>
+                <element signature="e#412#430#0" expanded="true" />
+                <element signature="e#624#651#0" expanded="true" />
+                <element signature="e#771#789#0" expanded="true" />
+                <element signature="e#906#931#0" expanded="true" />
+                <element signature="e#1253#1280#0" expanded="true" />
+                <element signature="e#1404#1422#0" expanded="true" />
+                <element signature="e#1544#1562#0" expanded="true" />
+                <element signature="e#1860#1878#0" expanded="true" />
+                <element signature="e#1974#1997#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -62,14 +65,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DreamAdapter.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="DreamAdapter.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/csc4330/mike/dreamlink/adapters/DreamAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.91054314">
-              <caret line="55" column="12" selection-start-line="55" selection-start-column="12" selection-end-line="55" selection-end-column="12" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="18" column="64" selection-start-line="18" selection-start-column="64" selection-end-line="18" selection-end-column="64" />
               <folding>
-                <element signature="e#723#1145#0" expanded="true" />
-                <element signature="e#1144#1145#0" expanded="true" />
+                <element signature="e#516#963#0" expanded="true" />
+                <element signature="e#962#963#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -1874,6 +1877,7 @@
       <list>
         <option value="$PROJECT_DIR$/src/main/java/csc4330/mike/dreamlink/activities/DreamFeed.java" />
         <option value="$PROJECT_DIR$/src/main/java/csc4330/mike/dreamlink/adapters/DreamAdapter.java" />
+        <option value="$PROJECT_DIR$/src/main/AndroidManifest.xml" />
       </list>
     </option>
   </component>
@@ -1881,8 +1885,8 @@
     <order />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="527" />
-    <option name="y" value="137" />
+    <option name="x" value="406" />
+    <option name="y" value="23" />
     <option name="width" value="1201" />
     <option name="height" value="1091" />
   </component>
@@ -2211,7 +2215,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="527" y="137" width="1201" height="1091" extended-state="0" />
+    <frame x="406" y="23" width="1201" height="1091" extended-state="0" />
     <editor active="false" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
@@ -2251,14 +2255,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="29" column="38" selection-start-line="29" selection-start-column="38" selection-end-line="29" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/csc4330/mike/dreamlink/activities/DreamFeed.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -2283,11 +2279,29 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/csc4330/mike/dreamlink/adapters/DreamAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.91054314">
-          <caret line="55" column="12" selection-start-line="55" selection-start-column="12" selection-end-line="55" selection-end-column="12" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="18" column="64" selection-start-line="18" selection-start-column="64" selection-end-line="18" selection-end-column="64" />
           <folding>
-            <element signature="e#723#1145#0" expanded="true" />
-            <element signature="e#1144#1145#0" expanded="true" />
+            <element signature="e#516#963#0" expanded="true" />
+            <element signature="e#962#963#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.85623">
+          <caret line="55" column="49" selection-start-line="55" selection-start-column="49" selection-end-line="55" selection-end-column="49" />
+          <folding>
+            <element signature="e#412#430#0" expanded="true" />
+            <element signature="e#624#651#0" expanded="true" />
+            <element signature="e#771#789#0" expanded="true" />
+            <element signature="e#906#931#0" expanded="true" />
+            <element signature="e#1253#1280#0" expanded="true" />
+            <element signature="e#1404#1422#0" expanded="true" />
+            <element signature="e#1544#1562#0" expanded="true" />
+            <element signature="e#1860#1878#0" expanded="true" />
+            <element signature="e#1974#1997#0" expanded="true" />
           </folding>
         </state>
       </provider>
