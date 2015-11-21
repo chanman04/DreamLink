@@ -39,11 +39,11 @@ public class DreamAdapter extends ParseQueryAdapter<ParseObject>{
         super.getItemView(object, v, parent);
 
         // Add the title view
-        TextView titleTextView = (TextView) v.findViewById(R.id.dream_title);
+        TextView titleTextView = (TextView) v.findViewById(R.id.dreamTitle);
         titleTextView.setText(object.getString("DREAM_TITLE"));
 
         //Add the entry view
-        TextView entryTextView = (TextView) v.findViewById(R.id.dream_entry);
+        TextView entryTextView = (TextView) v.findViewById(R.id.dreamEntry);
         entryTextView.setText(object.getString("DREAM_ENTRY"));
 
         return v;

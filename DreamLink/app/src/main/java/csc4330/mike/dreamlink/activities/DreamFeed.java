@@ -35,7 +35,7 @@ public class DreamFeed extends Activity{
     private DreamAdapter dreamAdapter;
     private ListView listView;
     private Button createDreamButton;
-    private String userName = "captaincrunch";
+    private String userName = "oLzUtZyxLQ7WoglqGlMk9BRzN";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +50,7 @@ public class DreamFeed extends Activity{
         listView = (ListView) findViewById(R.id.dream_list);
         listView.setAdapter(dreamAdapter);
         dreamAdapter.loadObjects();
+
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -69,9 +70,5 @@ public class DreamFeed extends Activity{
             }
         });
 
-
-
-        }
-
-
     }
+}

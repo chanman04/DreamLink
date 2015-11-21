@@ -6,11 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <include
-        layout="@layout/toolbar"
-        android:id="@+id/include">
-
-    </include>
 
     <ListView
         android:id="@+id/dream_list"
@@ -19,7 +14,6 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:dividerHeight="1dp"
-        android:layout_below="@+id/include"
         android:layout_centerHorizontal="true" />
 
 
