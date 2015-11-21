@@ -21,7 +21,7 @@ public class DreamAdapter extends ParseQueryAdapter<ParseObject>{
             public ParseQuery create(){
                 ParseQuery query = new ParseQuery("DREAM");
                 //query.whereEqualTo("username", username); //username not yet linked to dreams on parse?
-                query.whereEqualTo("DREAMER", ParseUser.getCurrentUser()); //just testing
+                query.whereEqualTo("test", true); //just testing
                 //need to link dreams to users
                 return query;
             }

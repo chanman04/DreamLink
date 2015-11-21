@@ -12,7 +12,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/dreamTitle"
-        android:textColor="#A0A0A0" />
+        android:textColor="#A0A0A0"
+        android:maxLines="3"/>
 
     <!--<Button
         android:id="@+id/create_dream_button"
@@ -24,4 +25,5 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/dreamEntry"
         android:text="Create New Dream"/>-->
+
 </RelativeLayout>
