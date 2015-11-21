@@ -25,6 +25,11 @@
         <activity
             android:name=".activities.DreamFeed"
             android:label="@string/dream_feed_menu" >
+        </activity>
+
+        <activity
+            android:name=".activities.UserDreamFeed"
+            android:label="@string/record_dream_menu" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
