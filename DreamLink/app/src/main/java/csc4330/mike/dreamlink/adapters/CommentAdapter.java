@@ -27,21 +27,20 @@ public class CommentAdapter extends ParseQueryAdapter<ParseObject> {
 
     @Override
     public View getItemView(ParseObject object, View v, ViewGroup parent){
-        //TODO: Do actual views
         //View row = convertView;
         //DreamHolder holder = null;
         if(v == null) {
-            v = View.inflate(getContext(), R.layout.dream_layout, null);
+            v = View.inflate(getContext(), R.layout.comment_layout, null);
         }
 
         super.getItemView(object, v, parent);
 
         // Add the title view
-        TextView titleTextView = (TextView) v.findViewById(R.id.dreamTitle);
-        titleTextView.setText(object.getParseUser("dreamer").getString("username"));
+        TextView titleTextView = (TextView) v.findViewById(R.id.comment_title);
+        titleTextView.setText(object.getParseUser("commenter").getString("username"));
 
         //Add the entry view
-        TextView entryTextView = (TextView) v.findViewById(R.id.dreamEntry);
+        TextView entryTextView = (TextView) v.findViewById(R.id.comment_text);
         entryTextView.setText(object.getString("text"));
 
         return v;
