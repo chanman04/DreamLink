@@ -9,7 +9,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-
+import com.facebook.AccessToken;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
 import com.facebook.login.widget.LoginButton;
 import com.parse.LogInCallback;
 import com.parse.ParseFacebookUtils;
@@ -17,7 +19,9 @@ import com.parse.ParseUser;
 import com.parse.SaveCallback;
 import com.parse.SignUpCallback;
 
-import java.text.ParseException;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -25,7 +29,6 @@ import java.util.regex.Pattern;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import csc4330.mike.dreamlink.R;
-import csc4330.mike.dreamlink.components.Contact;
 
 /**
  * Created by Mike on 9/4/15.
@@ -90,6 +93,21 @@ public class LoginScreen extends ActionBarActivity {
                                     public void done(com.parse.ParseException e) {
                                         if (ParseFacebookUtils.isLinked(user)) {
                                             Log.d("MyApp", "User logged in with Facebook!");
+                                            //changing username to real username
+                                            AccessToken token = AccessToken.getCurrentAccessToken();
+                                            GraphRequest.newMeRequest(token, new GraphRequest.GraphJSONObjectCallback() {
+                                                @Override
+                                                public void onCompleted(JSONObject jsonObject, GraphResponse graphResponse) {
+                                                    try {
+                                                        String firstName = jsonObject.getString("first_name");
+                                                        String lastName = jsonObject.getString("last_name");
+                                                        user.setUsername(firstName+" "+lastName);
+                                                        user.saveInBackground();
+                                                    } catch (JSONException e1) {
+                                                        e1.printStackTrace();
+                                                    }
+                                                }
+                                            });
                                             startActivity(new Intent(LoginScreen.this, DreamFeed.class));
                                         }
                                     }

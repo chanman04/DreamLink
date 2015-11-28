@@ -2,12 +2,11 @@ package csc4330.mike.dreamlink.activities;
 
 import android.app.Application;
 import android.content.Intent;
-import android.util.Log;
 
+import com.facebook.FacebookSdk;
 import com.parse.Parse;
-import com.parse.ParseObject;
 import com.parse.ParseFacebookUtils;
-import com.parse.ParseUser;
+import com.parse.ParseObject;
 
 import csc4330.mike.dreamlink.components.Dream;
 
@@ -43,8 +42,8 @@ private String username;
         ParseObject.registerSubclass(Dream.class);
         ParseObject.registerSubclass(Hashtag.class);
         Parse.initialize(this, "2BpAZP02XxiKszInLiS1ZTdGRf83pCfGSFhDCFX2", "2C8XUbmEYZLKoLejypoMKivrhVdVqWciE82PVHOA");
-//        FacebookSdk.sdkInitialize(this);
-//        ParseFacebookUtils.initialize(this);
+        FacebookSdk.sdkInitialize(this);
+        ParseFacebookUtils.initialize(this);
 
         final Intent intent = new Intent();
         intent.setClass(DreamLinkApplication.this, DreamFeed.class);

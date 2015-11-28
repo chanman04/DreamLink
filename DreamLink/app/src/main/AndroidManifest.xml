@@ -15,7 +15,10 @@
         <activity
             android:name=".activities.LoginScreen"
             android:label="@string/login_screen_menu" >
-
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".activities.MainActivity"
@@ -30,10 +33,6 @@
         <activity
             android:name=".activities.UserDreamFeed"
             android:label="@string/record_dream_menu" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <activity
