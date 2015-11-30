@@ -1,5 +1,6 @@
 package csc4330.mike.dreamlink.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
@@ -60,6 +61,8 @@ public class RecordDream extends ActionBarActivity {
                         userDream.put("DREAMER", ParseUser.getCurrentUser());
                         userDream.saveInBackground();
                         Toast.makeText(RecordDream.this, "Thanks for sharing your dream", Toast.LENGTH_SHORT).show();
+                        Intent feedIntent = new Intent(RecordDream.this, DreamFeed.class);
+                        startActivity(feedIntent);
                     }
 
                 }catch(Exception e){

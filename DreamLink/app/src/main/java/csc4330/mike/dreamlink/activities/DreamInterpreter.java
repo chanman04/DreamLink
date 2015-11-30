@@ -26,7 +26,7 @@ public class DreamInterpreter extends Activity {
 
     private TextView dreamTitle;
     private TextView dreamEntry;
-    private Button interpretButton;
+    private Button submitDreamButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,9 +35,7 @@ public class DreamInterpreter extends Activity {
 
         dreamTitle = (TextView) findViewById(R.id.dream_title);
         dreamEntry = (TextView) findViewById(R.id.dream_entry);
-        interpretButton = (Button) findViewById(R.id.interpret_button);
 
-        //dreamTitle = (cast as what? TextView?) findViewById(R.id.
 
         String parseObjId = getIntent().getStringExtra("parse_obj_id");
         ParseQuery<ParseObject> query = ParseQuery.getQuery("DREAM"); //which query to pull here?
@@ -54,13 +52,6 @@ public class DreamInterpreter extends Activity {
             }
         });
 
-
-        interpretButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //do stuff here
-            }
-        });
 
     }
 }
