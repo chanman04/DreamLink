@@ -28,6 +28,7 @@ public class DreamView extends Activity {
     private Button commentButton;
     private ParseObject dream;
     private ListView comments;
+    private String parseObjId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +42,7 @@ public class DreamView extends Activity {
         comments = (ListView) findViewById(R.id.comments_View);
 
         //Populates the layout with the correct parse dream object passed from dreamFeed
-        String parseObjId = getIntent().getStringExtra("parse_obj_id");
+        parseObjId = getIntent().getStringExtra("parse_obj_id");
         ParseQuery<ParseObject> query = ParseQuery.getQuery("DREAM"); //which query to pull here?
         try {
             dream = query.get(parseObjId);
@@ -61,6 +62,8 @@ public class DreamView extends Activity {
                 comment.put("commenter", ParseUser.getCurrentUser());
                 comment.put("dream", dream);
                 comment.saveInBackground(null);
+
+                Toast.makeText(DreamView.this, "Your comment was submitted", Toast.LENGTH_LONG).show();
             }
         });
     }
