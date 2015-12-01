@@ -7,22 +7,63 @@
         layout="@layout/toolbar">
     </include>
 
-    <ListView
-        android:id="@+id/dream_list"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/edittext_boarder"
-        android:divider="#000000"
-        android:dividerHeight="2dp"
-        android:layout_weight="1"
-        android:layout_gravity="bottom|center_horizontal"
-        android:textSize="16sp"
-        android:paddingTop="10sp"
-        android:paddingBottom="10sp">
-    </ListView>
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/nav_drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:background="#ffff"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/intro_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="10sp"
+                android:paddingBottom="10sp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:text="Welcome to the DreamLink! To navigate the app swipe right to bring out the navigation menu. Below is your dream feed where you can see you and your friends dreams"/>
+
+            <ListView
+                android:id="@+id/dream_list"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="bottom|center_horizontal"
+                android:textSize="16sp"
+                android:paddingTop="10sp"
+                android:paddingBottom="10sp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:layout_below="@+id/intro_text">
+            </ListView>
+
+        </RelativeLayout>
+
+        <!-- navigation drawer -->
+        <RelativeLayout
+            android:layout_gravity="left|start"
+            android:layout_width="match_parent"
+            android:background="#fff"
+            android:layout_height="match_parent">
+
+            <ListView
+                android:id="@+id/nav_drawer_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:divider="#eee"
+                android:background="#fff"
+                android:dividerHeight="1dp" />
+
+        </RelativeLayout>
+
+    </android.support.v4.widget.DrawerLayout>
 
 </LinearLayout>

@@ -20,7 +20,6 @@ import csc4330.mike.dreamlink.adapters.UserDreamAdapter;
 public class UserDreamFeed extends Activity {
 
     @Bind(R.id.toolbar) Toolbar mainToolbar;
-
     private UserDreamAdapter dreamAdapter;
     private ListView listView;
     private Button createDreamButton;
@@ -33,7 +32,6 @@ public class UserDreamFeed extends Activity {
         ButterKnife.bind(this);
 
         dreamAdapter = new UserDreamAdapter(this, userName);
-
         listView = (ListView) findViewById(R.id.dream_list);
         listView.setAdapter(dreamAdapter);
         dreamAdapter.loadObjects();
