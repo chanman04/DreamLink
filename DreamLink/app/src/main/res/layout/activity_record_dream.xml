@@ -20,7 +20,9 @@
         android:layout_width="250sp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:hint="title...."/>
+        android:hint="title...."
+        android:background="@drawable/edittext_boarder"/>
+
     <TextView
         android:id="@+id/record_dream_text"
         android:layout_width="wrap_content"
@@ -36,11 +38,13 @@
         android:layout_width="350sp"
         android:layout_height="wrap_content"
         android:inputType="textMultiLine"
+        android:gravity="top"
         android:maxLines="20"
         android:lines="4"
-        android:layout_gravity="center_horizontal"
         android:layout_weight="0.42"
-        android:hint="Dream goes here"/>
+        android:hint="Dream goes here"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/edittext_boarder"/>
 
     <TextView
         android:id="@+id/text_hashtag"
@@ -59,7 +63,8 @@
         android:ems="10"
         android:layout_gravity="center_horizontal"
         android:layout_weight="0.12"
-        android:hint="#hashtags...."/>
+        android:hint="#hashtags...."
+        android:background="@drawable/edittext_boarder"/>/>
 
     <Button
         android:id="@+id/submit_dream_button"
