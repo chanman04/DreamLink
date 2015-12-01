@@ -2,11 +2,9 @@ package csc4330.mike.dreamlink.activities;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.parse.GetCallback;
 import com.parse.ParseException;
@@ -16,29 +14,22 @@ import com.parse.ParseQuery;
 import butterknife.Bind;
 import csc4330.mike.dreamlink.R;
 
-/**
- * Created by Mike on 11/18/15.
- */
-public class DreamInterpreter extends Activity {
+public class DreamView extends Activity {
 
-    @Bind(R.id.toolbar)
-    Toolbar mainToolbar;
+    @Bind(R.id.toolbar) Toolbar mainToolbar;
 
     private TextView dreamTitle;
     private TextView dreamEntry;
-    private Button interpretButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.dream_interpret_layout);
+        setContentView(R.layout.activity_dream_view);
 
         dreamTitle = (TextView) findViewById(R.id.dream_title);
         dreamEntry = (TextView) findViewById(R.id.dream_entry);
-        interpretButton = (Button) findViewById(R.id.interpret_button);
 
-        //dreamTitle = (cast as what? TextView?) findViewById(R.id.
-
+        //Populates the layout with the correct parse dream object passed from dreamFeed
         String parseObjId = getIntent().getStringExtra("parse_obj_id");
         ParseQuery<ParseObject> query = ParseQuery.getQuery("DREAM"); //which query to pull here?
         query.getInBackground(parseObjId, new GetCallback<ParseObject>() {
@@ -49,18 +40,9 @@ public class DreamInterpreter extends Activity {
                     dreamTitle.setText(item.getString("DREAM_TITLE"));
                     dreamEntry.setText(item.getString("DREAM_ENTRY"));
                 } else {
-                    Toast.makeText(DreamInterpreter.this, "FAILED TO RETRIEVE DREAM", Toast.LENGTH_LONG).show();
+                    Toast.makeText(DreamView.this, "FAILED TO RETRIEVE DREAM", Toast.LENGTH_LONG).show();
                 }
             }
         });
-
-
-        interpretButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //do stuff here
-            }
-        });
-
     }
 }

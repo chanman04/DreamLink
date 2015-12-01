@@ -10,8 +10,8 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import butterknife.Bind;
+import butterknife.ButterKnife;
 import csc4330.mike.dreamlink.R;
-import csc4330.mike.dreamlink.adapters.DreamAdapter;
 import csc4330.mike.dreamlink.adapters.UserDreamAdapter;
 
 /**
@@ -19,8 +19,8 @@ import csc4330.mike.dreamlink.adapters.UserDreamAdapter;
  */
 public class UserDreamFeed extends Activity {
 
-    @Bind(R.id.toolbar)
-    Toolbar mainToolbar;
+    @Bind(R.id.toolbar) Toolbar mainToolbar;
+
     private UserDreamAdapter dreamAdapter;
     private ListView listView;
     private Button createDreamButton;
@@ -30,35 +30,26 @@ public class UserDreamFeed extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_dream_feed);
-        //ButterKnife.bind(this);
+        ButterKnife.bind(this);
 
         dreamAdapter = new UserDreamAdapter(this, userName);
-        //dreamFragment = new DreamFragment();
-        //dreamFragment.setArguments(???);
 
         listView = (ListView) findViewById(R.id.dream_list);
         listView.setAdapter(dreamAdapter);
         dreamAdapter.loadObjects();
 
-
+        //if item in list view is clicked, it brings up that dream's page
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //String item = (String) parent.getItemAtPosition(position); this doesnt work
-                //String item = dreamAdapter.getItem(position).toString();
-                //Toast.makeText(DreamLog.this, "CLICK: "+item, Toast.LENGTH_SHORT).show(); //how to get actual object values and stuff?
-                //below change RecordDream.class to whatever Dream Interpretation class that is made
 
                 String parseObjectId = dreamAdapter.getItem(position).getObjectId();
 
-                Intent intent = new Intent(UserDreamFeed.this, DreamInterpreter.class);
+                Intent intent = new Intent(UserDreamFeed.this, DreamView.class);
                 intent.putExtra("parse_obj_id", parseObjectId);
                 startActivity(intent);
-
-                //or just switch adapter to new layout? what do?
             }
         });
-
     }
 }
 

@@ -20,8 +20,6 @@ import csc4330.mike.dreamlink.R;
  */
 public class RecordDream extends ActionBarActivity {
 
-
-    //@Bind(R.id.toolbar) Toolbar mainToolbar;
     @Bind(R.id.dream_title_ET) EditText dreamTitleET;
     @Bind(R.id.dream_ET) EditText recordDreamET;
     @Bind(R.id.submit_dream_button) Button submitDreamButton;
@@ -35,13 +33,10 @@ public class RecordDream extends ActionBarActivity {
         setContentView(R.layout.activity_record_dream);
         ButterKnife.bind(this);
 
-        //setSupportActionBar(mainToolbar);
-        //getSupportActionBar().setTitle("Post Your Dream");
-
         dreamTitleET.setHint("Give your dream a title");
         recordDreamET.setHint("Record your dream");
 
-
+        //Button that takes all info from EditText fields in layout and creates a dream object
         submitDreamButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,7 +48,6 @@ public class RecordDream extends ActionBarActivity {
                     }else{
                         dreamTitle = (dreamTitleET.getText().toString());
                         dreamEntry = (recordDreamET.getText().toString());
-
 
                         ParseObject userDream = new ParseObject("DREAM");
                         userDream.put("DREAM_TITLE",dreamTitle);
@@ -70,13 +64,9 @@ public class RecordDream extends ActionBarActivity {
                     e.printStackTrace();
                     Toast.makeText(RecordDream.this, "There was a error recording your dream",Toast.LENGTH_SHORT).show();
                     return;
-
                 }
             }
 
         });
-
-
-
     }
 }

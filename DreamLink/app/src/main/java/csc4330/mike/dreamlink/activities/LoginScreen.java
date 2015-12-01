@@ -9,7 +9,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-
 import com.facebook.login.widget.LoginButton;
 import com.parse.LogInCallback;
 import com.parse.ParseFacebookUtils;
@@ -17,7 +16,6 @@ import com.parse.ParseUser;
 import com.parse.SaveCallback;
 import com.parse.SignUpCallback;
 
-import java.text.ParseException;
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -25,7 +23,6 @@ import java.util.regex.Pattern;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import csc4330.mike.dreamlink.R;
-import csc4330.mike.dreamlink.components.Contact;
 
 /**
  * Created by Mike on 9/4/15.
@@ -36,8 +33,6 @@ public class LoginScreen extends ActionBarActivity {
     @Bind(R.id.password_ET) EditText passwordEditText;
     @Bind(R.id.email_ET) EditText emailEditText;
     @Bind(R.id.submit_button) Button submitButton;
-//    @Bind(R.id.fb_button) LoginButton facebookButton;
-    @Bind(R.id.signup_button) Button signupButton;
 
     private String userField ="";
     private String passwordField ="";
@@ -48,25 +43,11 @@ public class LoginScreen extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        /*
-        if(ParseUser.getCurrentUser() != null){
-            if(ParseFacebookUtils.isLinked(ParseUser.getCurrentUser())){
-                ParseFacebookUtils.logInWithReadPermissionsInBackground(LoginScreen.this,
-                        Arrays.asList("email", "user_friends", "public_profile"), new LogInCallback() {
-                            @Override
-                            public void done(final ParseUser user, com.parse.ParseException e) {
-                                Log.d("MyApp", "User auto logged in through Facebook!");
-                                startActivity(new Intent(LoginScreen.this, DreamFeed.class));
-                            }
-                        });
-            }
-        }
-        */
-
         setContentView(R.layout.activity_user_login);
 
         facebookLoginButton = (LoginButton)findViewById(R.id.fb_button);
 
+        //User clicks Facebook button and attempts to sign in with facebook
         facebookLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -74,32 +55,43 @@ public class LoginScreen extends ActionBarActivity {
                         Arrays.asList("email", "user_friends", "public_profile"), new LogInCallback() {
                     @Override
                     public void done(final ParseUser user, com.parse.ParseException e) {
+                        //checks if there if login to facebook was a failure
                         if (user == null) {
                             Log.d("MyApp", "The user cancelled the Facebook login.");
 
                             Toast.makeText(getApplicationContext(), "Log-out from Facebook and try again please!", Toast.LENGTH_SHORT).show();
 
                             ParseUser.logOut();
+
+                        //checks if facebook user is new
                         } else if (user.isNew()) {
                             Log.d("MyApp", "User signed up and logged in through Facebook!");
 
+                            //checks if facebook user is not linked to user in parse
+                            //if not, logs in with facebook user and creates user in parse
                             if (!ParseFacebookUtils.isLinked(user)) {
                                 ParseFacebookUtils.linkWithReadPermissionsInBackground(user, LoginScreen.this,
                                         Arrays.asList("email", "user_friends", "public_profile"), new SaveCallback() {
                                     @Override
                                     public void done(com.parse.ParseException e) {
+
                                         if (ParseFacebookUtils.isLinked(user)) {
                                             Log.d("MyApp", "User logged in with Facebook!");
                                             startActivity(new Intent(LoginScreen.this, DreamFeed.class));
                                         }
                                     }
                                 });
+
+                            //if new facebook user exists in parse, proceed to dreamfeed
                             } else {
                                 startActivity(new Intent(LoginScreen.this, DreamFeed.class));
-                              }
+                            }
+
+                        //facebook user is not new
                         } else {
                             Log.d("MyApp", "User logged in through Facebook!");
 
+                            //checks if facebook user is linked to user in parse
                             if (!ParseFacebookUtils.isLinked(user)) {
                                 ParseFacebookUtils.linkWithReadPermissionsInBackground(user, LoginScreen.this,
                                         Arrays.asList("email", "user_friends", "public_profile"), new SaveCallback() {
@@ -111,6 +103,9 @@ public class LoginScreen extends ActionBarActivity {
                                         }
                                     }
                                 });
+
+                            //Facebook user is not new and user exists in parse
+                            //proceed to dreamFeed
                             }startActivity(new Intent(LoginScreen.this, DreamFeed.class));
                         }
                     }
@@ -124,60 +119,24 @@ public class LoginScreen extends ActionBarActivity {
         passwordEditText.setHint("password");
         emailEditText.setHint("email");
 
+        //creates parse user after entering in the fields
+        //User signs in and is redirected to DreamFeed
 
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                try {
+                ParseUser user = new ParseUser();
+                userField = userEditText.getText().toString();
+                passwordField = passwordEditText.getText().toString();
+                emailField = emailEditText.getText().toString();
 
-                    ParseUser user = new ParseUser();
-
-
-                    //Check for a username
-                    if (userEditText.getText().toString().isEmpty()) {
-                        userEditText.setError("UserName cannot be blank");
-                        //Check for password
-                    } else if (passwordEditText.getText().toString().isEmpty()) {
-                        passwordEditText.setError("Password field cannot not be blank");
-                        //Check for email
-                    } else if (emailEditText.getText().toString().isEmpty()) {
-                        emailEditText.setError("Email field cannot be blank");
-                        //Create the contact and make it into ParseUser
-                    } else if (emailCheck(emailEditText.getText().toString()) == false) {
-                        emailEditText.setError("Your entry is not a valid email address");
-
-                    } else {
-
-                        userField = userEditText.getText().toString();
-                        passwordField = userEditText.getText().toString();
-                        emailField = userEditText.getText().toString();
-
-                        createParseUser(userField, passwordField, emailField);
-
-
-                    }
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    Toast.makeText(LoginScreen.this, "Please correct your entries and resubmit", Toast.LENGTH_SHORT).show();
-                    return;
-                }
+                createParseUser(userField, passwordField, emailField);
             }
         });
-
-        signupButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent feedIntent = new Intent(LoginScreen.this, SignupActivity.class);
-                startActivity(feedIntent);
-            }
-        });
-
     }
 
-
+    //Creates parse user with information filled out by the user in the EditTexts
     public void createParseUser(String username, String password, String email) {
 
         ParseUser user = new ParseUser();
@@ -185,25 +144,21 @@ public class LoginScreen extends ActionBarActivity {
         user.setPassword(password);
         user.setEmail(email);
         user.signUpInBackground(new SignUpCallback() {
-
             @Override
             public void done(com.parse.ParseException e) {
 
                 if (e == null) {
-
                     Toast.makeText(LoginScreen.this, "Your account was created successfully!", Toast.LENGTH_SHORT).show();
                     Intent feedIntent = new Intent(LoginScreen.this, DreamFeed.class);
                     startActivity(feedIntent);
-
                 } else {
-                    Toast.makeText(LoginScreen.this, "Parse didn't get yo shit!", Toast.LENGTH_SHORT).show();
-
+                    Toast.makeText(LoginScreen.this, "Parse didn't create your account", Toast.LENGTH_SHORT).show();
                 }
             }
         });
-
     }
 
+    //Checks whether email entered is a valid mailing address
     public static boolean emailCheck(String email) {
 
         boolean isValid = false;
