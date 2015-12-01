@@ -16,7 +16,8 @@ import butterknife.ButterKnife;
 import csc4330.mike.dreamlink.R;
 
 /**
- * Created by Mike on 9/4/15.
+ * This Java class sets the functionality for allowing the user to record their dreams and send them
+ * to our cloud database Parse.
  */
 public class RecordDream extends ActionBarActivity {
 

@@ -25,7 +25,9 @@ import butterknife.ButterKnife;
 import csc4330.mike.dreamlink.R;
 
 /**
- * Created by Mike on 9/4/15.
+ * This class handles the initial login screen activity when the user first opens the app.
+ * Here we handle the user input for creating a unique username, password and email. Alternatively
+ * it also handles if a user decides they would like to login via Facebook.
  */
 public class LoginScreen extends ActionBarActivity {
 

@@ -8,8 +8,8 @@ import com.parse.ParseUser;
 import csc4330.mike.dreamlink.activities.*;
 
 /**
- * The class that Dreams are made of.
- * Created by Matthew Wolff on 9/21/2015.
+ * This class was for future use to deal with inheritance of ParseObjects from our Dream table in Parse
+ * and be able to access them locally.
  *
  * NOTE: Properties of the class that are to be tracked by Parse should be synthesized by using
  * getX() and setX(param) methods. The body of such methods should follow an identical pattern.

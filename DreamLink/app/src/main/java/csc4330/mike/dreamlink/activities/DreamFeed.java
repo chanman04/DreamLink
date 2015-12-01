@@ -21,7 +21,8 @@ import csc4330.mike.dreamlink.R;
 import csc4330.mike.dreamlink.adapters.DreamAdapter;
 
 /**
- * Created by Mike on 9/4/15.
+ *This class is for handling the functionalty of our opening page after the login screen. The DreamFeed
+ * activity is the main page for navigating around the app. It also displays dreams from the user's social circle.
  */
 public class DreamFeed extends Activity{
 

@@ -11,7 +11,8 @@ import com.parse.ParseObject;
 import csc4330.mike.dreamlink.components.Dream;
 
 /**
- * Created by Mike on 9/4/15.
+ * This application class initializes the app and performs intensive data processes before we display
+ * the first activity --> Dream Feed activity.
  */
 public class DreamLinkApplication extends Application {
 

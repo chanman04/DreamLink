@@ -1,7 +1,7 @@
 package csc4330.mike.dreamlink.components;
 
 /**
- * Created by Mike on 9/11/15.
+ * This class was for future use to deal with inheritance of ParseUsers and to be able to create them locally.
  */
 public class Contact {
 

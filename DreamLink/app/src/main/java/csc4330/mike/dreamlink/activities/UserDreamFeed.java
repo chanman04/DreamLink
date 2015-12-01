@@ -15,7 +15,8 @@ import csc4330.mike.dreamlink.R;
 import csc4330.mike.dreamlink.adapters.UserDreamAdapter;
 
 /**
- * Created by Mike on 11/20/15.
+ * This is the Java class that displays a user's specific dreams.
+ * We utilize the UserAdapter.class to perform the database queries and display them in a ListView here.
  */
 public class UserDreamFeed extends Activity {
 

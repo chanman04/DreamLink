@@ -18,6 +18,12 @@ import butterknife.Bind;
 import csc4330.mike.dreamlink.R;
 import csc4330.mike.dreamlink.adapters.CommentAdapter;
 
+/*
+* This class handles the functionality for the activity created after a user clicks on a specific dream
+* in our ListView. This class sets the Dream objects title and entry and also handles querying for
+* the comments within the database related to a specific Dream object.
+ */
+
 public class DreamView extends Activity {
 
     @Bind(R.id.toolbar) Toolbar mainToolbar;

@@ -7,7 +7,8 @@ import com.parse.ParseRelation;
 import csc4330.mike.dreamlink.components.Dream;
 
 /**
- * Created by Matthew Wolff on 9/23/2015.
+ * This class was created for the creation of Hashtag objects. This specifically deals with when a
+ * user adds a hashtag to their dream.
  */
 
 @ParseClassName("Hashtag")
