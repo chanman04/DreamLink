@@ -1,6 +1,7 @@
 package csc4330.mike.dreamlink.activities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -70,7 +71,19 @@ public class DreamView extends Activity {
                 comment.saveInBackground(null);
 
                 Toast.makeText(DreamView.this, "Your comment was submitted", Toast.LENGTH_LONG).show();
+
+                //parseObjId = getIntent().getStringExtra("parse_obj_id");
+
+                Intent intent = new Intent(DreamView.this, DreamView.class);
+                intent.putExtra("parse_obj_id", parseObjId);
+                startActivity(intent);
             }
         });
+    }
+    
+    public void onBackPressed()
+    {
+        Intent intent = new Intent(DreamView.this, DreamFeed.class);
+        startActivity(intent);
     }
 }

@@ -47,6 +47,21 @@ public class LoginScreen extends ActionBarActivity {
 
         setContentView(R.layout.activity_user_login);
 
+        final Intent intent = new Intent();
+        intent.setClass(LoginScreen.this, DreamFeed.class);
+        intent.addFlags(intent.FLAG_ACTIVITY_NEW_TASK);
+
+//        if(ParseUser.getCurrentUser() != null){
+//            if(ParseFacebookUtils.isLinked(ParseUser.getCurrentUser())) {
+//                Log.d("Log", "Auto logged in through FB");
+//                startActivity(intent);
+//            }
+//            else if(ParseUser.getCurrentUser() != null){
+//                Log.d("Log", "Auto logged");
+//                startActivity(intent);
+//            }
+//        }
+
         facebookLoginButton = (LoginButton)findViewById(R.id.fb_button);
 
         //User clicks Facebook button and attempts to sign in with facebook

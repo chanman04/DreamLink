@@ -58,19 +58,16 @@ public class DreamFeed extends Activity{
             @Override
             public void onDrawerClosed(View drawerView) {
                 super.onDrawerClosed(drawerView);
-
             }
 
             @Override
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
-
             }
         };
+
         navDrawerLayout.setDrawerListener(navDrawerToggle);
         navDrawerList.setOnItemClickListener(new NavDrawerListener());
-
-
 
         dreamAdapter = new DreamAdapter(this, userName);
         listView = (ListView) findViewById(R.id.dream_list);

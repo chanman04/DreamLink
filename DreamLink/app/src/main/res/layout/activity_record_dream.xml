@@ -21,6 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:hint="title...."
+        android:paddingLeft="10dp"
         android:background="@drawable/edittext_boarder"/>
 
     <TextView
@@ -43,6 +44,8 @@
         android:lines="4"
         android:layout_weight="0.42"
         android:hint="Dream goes here"
+        android:paddingLeft="10dp"
+        android:paddingTop="5dp"
         android:layout_gravity="center_horizontal"
         android:background="@drawable/edittext_boarder"/>
 

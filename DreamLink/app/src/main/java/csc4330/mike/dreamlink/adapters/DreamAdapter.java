@@ -8,7 +8,6 @@ import android.widget.TextView;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseQueryAdapter;
-import com.parse.ParseUser;
 
 import csc4330.mike.dreamlink.R;
 
@@ -16,12 +15,13 @@ import csc4330.mike.dreamlink.R;
  * Created by Mike on 10/20/15.
  */
 public class DreamAdapter extends ParseQueryAdapter<ParseObject>{
-    public DreamAdapter(Context context, final String username){
-        super(context, new ParseQueryAdapter.QueryFactory<ParseObject>(){
-            public ParseQuery create(){
+
+    public DreamAdapter(Context context, final String username) {
+        super(context, new ParseQueryAdapter.QueryFactory<ParseObject>() {
+            public ParseQuery create() {
                 ParseQuery query = new ParseQuery("DREAM");
                 //query.whereEqualTo("username", username); //username not yet linked to dreams on parse?
-                query.whereEqualTo("test", true); //just testing
+                query.orderByDescending("createdAt");
                 //need to link dreams to users
                 return query;
             }

@@ -65,23 +65,23 @@
         </RelativeLayout>
 
     </android.support.v4.widget.DrawerLayout>
-    <ListView
-        android:id="@+id/dream_list"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/edittext_boarder"
-        android:divider="#000000"
-        android:dividerHeight="2dp"
-        android:layout_weight="1"
-        android:layout_gravity="bottom|center_horizontal"
-        android:textSize="16sp"
-        android:paddingTop="10sp"
-        android:paddingBottom="10sp"
-        android:paddingLeft="10sp">
-    </ListView>
+    <!--<ListView-->
+    <!--android:id="@+id/dream_list"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginLeft="10dp"-->
+    <!--android:layout_marginRight="10dp"-->
+    <!--android:layout_marginBottom="10dp"-->
+    <!--android:layout_marginTop="10dp"-->
+    <!--android:background="@drawable/edittext_boarder"-->
+    <!--android:divider="#000000 "-->
+    <!--android:dividerHeight="2dp"-->
+    <!--android:layout_weight="1"-->
+    <!--android:layout_gravity="bottom|center_horizontal"-->
+    <!--android:textSize="16sp"-->
+    <!--android:paddingTop="10sp"-->
+    <!--android:paddingBottom="10sp"-->
+    <!--android:paddingLeft="10sp">-->
+    <!--</ListView>-->
 
 </LinearLayout>

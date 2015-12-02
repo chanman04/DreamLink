@@ -16,7 +16,8 @@ import csc4330.mike.dreamlink.components.Dream;
  */
 public class DreamLinkApplication extends Application {
 
-private String username;
+    private String username;
+
     private static DreamLinkApplication singleInstance = null;
 
     public String getUsername() {
